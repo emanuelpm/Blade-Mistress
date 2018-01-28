@@ -1,0 +1,83 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BBonline", "BBonline.vcxproj", "{FE87D823-6335-4922-BC76-6CAFF49AAC4F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BMLauncher", "BMLauncher\BMLauncher.vcxproj", "{5C15C596-FC7E-42D2-9B41-BEDC4CC576F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IndexMaker", "IndexMaker\IndexMaker.vcxproj", "{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NameRipper", "NameRipper\NameRipper.vcxproj", "{11EE670B-455E-48A2-B5A8-DA91EA387013}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerWrapper", "ServerWrapper\ServerWrapper.vcxproj", "{703CA09B-B14E-47DE-B80B-B69808A92F92}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkinViewer", "SkinViewer\SkinViewer.vcxproj", "{8F93164E-6B5A-4766-8265-0D237C2AD23D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "robots", "robots\robots.vcxproj", "{6191E3AA-AE9B-4279-B743-438922BF4DBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Monitor", "Monitor\Monitor.vcxproj", "{A3F13EAC-B487-C02F-3D49-9A31FE75BE41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{591BE490-ABDD-4C53-8EFB-E6C61332E885}"
+	ProjectSection(SolutionItems) = preProject
+		..\Scripts\StageClientFiles.bat = ..\Scripts\StageClientFiles.bat
+		..\Scripts\StageServerFiles.bat = ..\Scripts\StageServerFiles.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dat", "Dat", "{8FF755C1-C410-407A-910C-C6B365238BD2}"
+	ProjectSection(SolutionItems) = preProject
+		..\Assets\ServerData\dungeons.dat = ..\Assets\ServerData\dungeons.dat
+		..\Assets\ServerData\items.txt = ..\Assets\ServerData\items.txt
+		..\Assets\ServerData\petDragonData.txt = ..\Assets\ServerData\petDragonData.txt
+		..\Assets\ServerData\questscripts.dat = ..\Assets\ServerData\questscripts.dat
+		..\Assets\readme.txt = ..\Assets\readme.txt
+		..\Assets\textColors.txt = ..\Assets\textColors.txt
+		..\Assets\ServerData\treeText.txt = ..\Assets\ServerData\treeText.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE87D823-6335-4922-BC76-6CAFF49AAC4F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE87D823-6335-4922-BC76-6CAFF49AAC4F}.Debug|Win32.Build.0 = Debug|Win32
+		{FE87D823-6335-4922-BC76-6CAFF49AAC4F}.Release|Win32.ActiveCfg = Release|Win32
+		{FE87D823-6335-4922-BC76-6CAFF49AAC4F}.Release|Win32.Build.0 = Release|Win32
+		{5C15C596-FC7E-42D2-9B41-BEDC4CC576F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5C15C596-FC7E-42D2-9B41-BEDC4CC576F5}.Debug|Win32.Build.0 = Debug|Win32
+		{5C15C596-FC7E-42D2-9B41-BEDC4CC576F5}.Release|Win32.ActiveCfg = Release|Win32
+		{5C15C596-FC7E-42D2-9B41-BEDC4CC576F5}.Release|Win32.Build.0 = Release|Win32
+		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Debug|Win32.Build.0 = Debug|Win32
+		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Release|Win32.ActiveCfg = Release|Win32
+		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Release|Win32.Build.0 = Release|Win32
+		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Debug|Win32.Build.0 = Debug|Win32
+		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Release|Win32.ActiveCfg = Release|Win32
+		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Release|Win32.Build.0 = Release|Win32
+		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Debug|Win32.ActiveCfg = Debug|Win32
+		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Debug|Win32.Build.0 = Debug|Win32
+		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Release|Win32.ActiveCfg = Release|Win32
+		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Release|Win32.Build.0 = Release|Win32
+		{8F93164E-6B5A-4766-8265-0D237C2AD23D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F93164E-6B5A-4766-8265-0D237C2AD23D}.Debug|Win32.Build.0 = Debug|Win32
+		{8F93164E-6B5A-4766-8265-0D237C2AD23D}.Release|Win32.ActiveCfg = Release|Win32
+		{8F93164E-6B5A-4766-8265-0D237C2AD23D}.Release|Win32.Build.0 = Release|Win32
+		{6191E3AA-AE9B-4279-B743-438922BF4DBE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6191E3AA-AE9B-4279-B743-438922BF4DBE}.Debug|Win32.Build.0 = Debug|Win32
+		{6191E3AA-AE9B-4279-B743-438922BF4DBE}.Release|Win32.ActiveCfg = Release|Win32
+		{6191E3AA-AE9B-4279-B743-438922BF4DBE}.Release|Win32.Build.0 = Release|Win32
+		{A3F13EAC-B487-C02F-3D49-9A31FE75BE41}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A3F13EAC-B487-C02F-3D49-9A31FE75BE41}.Debug|Win32.Build.0 = Debug|Win32
+		{A3F13EAC-B487-C02F-3D49-9A31FE75BE41}.Release|Win32.ActiveCfg = Release|Win32
+		{A3F13EAC-B487-C02F-3D49-9A31FE75BE41}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D718D513-CC88-4442-9D49-C9A4A906AC0A}
+	EndGlobalSection
+EndGlobal

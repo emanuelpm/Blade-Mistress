@@ -1,0 +1,231 @@
+// ********************** questscripts.dat ************************
+
+// the repository for the definition of all multi-part quests in blade mistress
+// notice that the // at the front of a line denotes a comment, and that empty
+// lines are allowed.
+
+
+// The DESC keyword adds a string of text to the quest verb above it, that shows up in the
+// player's text window when that quest verb becomes active.  This text can be LONG, as
+// much as 1000 bytes.
+
+// witches contain adventures.  adventures contain quests.
+
+
+
+
+// Note: witch names can be no longer than 60 bytes, and CAN contain spaces
+// ********************** WITCH **************************
+WITCH 207 152 Gertrude
+STATEMENT I am Gertrude. My sisters will be coming soon. You think you are ready for some adventure?  Let's just see how ready...
+READY	 // this tag, on its own line, means normal players can use this witch
+
+// QUEST 1
+ADVENTURE
+KILL MONSTER_TYPE 2 2
+DESC Let us see how brave of a warrior you are. Go kill some monsters in order.  First, a Tawny Minotaur.
+KILL MONSTER_TYPE 7 0
+DESC Next, kill me a Green Dragon.
+KILL MONSTER_TYPE 3 0
+DESC Finally, kill me a Sabertooth.
+GOTO LOCATION 207 152
+DESC Now come back and talk to me.
+REWARD GOLD 100
+DESC Here is some gold.  I have more quests for you when you are ready, young slayer.
+
+// QUEST 2
+ADVENTURE
+GOTO LOCATION 210 141
+DESC Go visit 210 141
+GOTO LOCATION 203 148
+DESC Now go look around 203 148
+KILL MONSTER_TYPE 2 3
+DESC Go kill me a Jade Mino!
+GOTO LOCATION 207 152
+DESC Now come back and talk to me.
+REWARD GOLD 100
+DESC Have some things!
+
+
+// QUEST 3
+ADVENTURE
+VISIT PLAYERTYPE FIGHTER
+DESC Go visit a fighter!
+VISIT PLAYERTYPE YOUNG
+DESC Go visit a new player!
+VISIT PLAYERTYPE MAGE
+DESC Go find yourself a mage!
+GOTO LOCATION 207 152
+DESC Now come back and talk to me.
+REWARD EGG 1 1
+DESC Not too bad a prize for walking around, huh?
+
+// QUEST 4
+ADVENTURE
+VISIT PLAYERTYPE BALANCED
+DESC Go visit a balanced player, such as Punisher.
+GIVEGOLD PLAYERTYPE POOR 100
+DESC Go give some gold to a poor player in the game.  Share the wealth!
+GIVEGOLD PlAYERTYPE MAGE 100
+DESC Now give some gold to a mage.  Mages need to eat too!
+GOTO LOCATION 207 152
+DESC Come back to me for your reward.
+REWARD EGG 2 2
+DESC Well done.  Your next quest will be a challenge!
+
+// QUEST 5
+ADVENTURE
+KILL MONSTER_TYPE 10 0
+DESC Go slaughter a Spirit Golem for me.
+KILL MONSTER_TYPE 11 0
+DESC Go kill a Spirit Minotaur for me.
+KILL MONSTER_TYPE 12 0
+DESC Go kill a 2 Spirit Tigers for me.
+KILL MONSTER_TYPE 12 0
+DESC I need one more Spirit Tiger sacrifice!
+GOTO LOCATION 207 152
+DESC Come back to me for your reward.
+REWARD STAFF 3
+REWARD EGG 2 3
+REWARD FAVOR 1
+DESC Well done!  I will have more quests for you yet!
+
+// QUEST 6
+ADVENTURE
+GOTO LOCATION 29 31
+DESC Go visit the crater of the Volcano, if you dare!!!
+KILL MONSTER_TYPE 25 0
+DESC Kill a zombie for me!
+KILL MONSTER_TYPE 25 1
+DESC Kill a Ghoul for me!
+GOTO LOCATION 207 152
+DESC Come back to me quickly!
+REWARD STAFF 3
+REWARD DUST 1
+DESC I still have more for you, great warrior!
+
+
+// Witch Number 2
+WITCH 38 38 Grizleda
+STATEMENT I am Grizelda.  I hope you are ready for a challenge, for my tasks can only be complated by the strongest warriors.
+READY	 // this tag, on its own line, means normal players can use this witch
+
+// QUEST 1
+ADVENTURE
+GOTO LOCATION 128 128
+DESC Travel to the middle of the main land.
+KILL MONSTER_TYPE 7 5
+DESC Go kill a dragon illusion, now that you have walked so far away. I enjoy playing games.
+GOTO LOCATION 128 128
+DESC Now go back to the middle one last time. I do enjoy this.
+REWARD GOLD 1000
+REWARD EGG 2 2
+DESC I'll give you some gold. If you want more, come talk to me.
+
+// Quest 2
+ADVENTURE
+KILL MONSTER_TYPE 25 3
+DESC Kill me 5 Ash Vampires.  Quickly now!
+KILL MONSTER_TYPE 25 3
+DESC 4 More!
+KILL MONSTER_TYPE 25 3
+DESC Only 3 left.
+KILL MONSTER_TYPE 25 3
+DESC Two more.  Don't give up on an old lady now!
+KILL MONSTER_TYPE 25 3
+DESC Last one!
+GIVEGOLD PLAYERTYPE POOR 200
+DESC Now, share your wealth and you will gain some for your generosity.
+REWARD GOLD 3000
+DESC Return to me for a great yet rewarding challenge, when you are ready!
+
+// QUEST 3
+ADVENTURE
+KILL MONSTER_TYPE 25 4
+DESC I have no use for weak players anymore.  Show me what you can do. Kill me 10 Pit Vampires.
+KILL MONSTER_TYPE 25 4
+DESC 9 left!
+KILL MONSTER_TYPE 25 4
+DESC 8 left!
+KILL MONSTER_TYPE 25 4
+DESC 7 left!
+KILL MONSTER_TYPE 25 4
+DESC 6 left!
+KILL MONSTER_TYPE 25 4
+DESC 5 left!
+KILL MONSTER_TYPE 25 4
+DESC 4 left!
+KILL MONSTER_TYPE 25 4
+DESC 3 left!
+KILL MONSTER_TYPE 25 4
+DESC 2 left!
+KILL MONSTER_TYPE 25 4
+DESC Last one!
+GOTO LOCATION 38 38
+DESC Come to me for your reward, warrior.  You have proven yourself to me!
+REWARD DUST 1
+REWARD DUST 1
+REWARD DUST 3
+REWARD DUST 3
+REWARD DUST 4
+REWARD GOLD 2000
+DESC I have heard people like you enjoy these dusts.  There are plenty more, if you are up for the challenge.
+
+
+
+// the VISIT quest means go up and talk to.
+// the PLAYERTYPE keyword is followed by one of these keywords:
+// FIGHTER, MAGE, CRAFTER, BALANCED, YOUNG, or POOR.
+// VISIT PLAYERTYPE FIGHTER
+
+// the GIVEGOLD quest means go up and give gold to.  The amount is always the LAST
+// argument on the line.
+// the PLAYERTYPE keyword is followed by one of these keywords:
+// FIGHTER, MAGE, CRAFTER, BALANCED, YOUNG, or POOR.
+// GIVEGOLD PLAYERTYPE CRAFTER 20
+
+// The STAFF keyword is followed by the staff quality, from 0 to 4.
+// REWARD STAFF 1
+
+// The TOTEM keyword is followed by the totem quality, from 0 to 21.
+// REWARD TOTEM 1
+
+// The DUST keyword is followed by the dust type, as a number from 0 to 4.
+// GREEN_DUST = 0
+// BLUE_DUST  = 1
+// BLACK_DUST = 2
+// WHITE_DUST = 3
+// RED_DUST   = 4
+// REWARD DUST 4
+
+// the INGOT keyword is followed by several arguments:
+// the power, the value in gold, the three RGB values, and the name comes last.
+// REWARD INGOT 10 80000 0 128 128 Chitin Ingot
+// REWARD INGOT 9 75000 0 50 128 Elatium Ingot
+// REWARD INGOT 8 50000 128 0 0 Vizorium Ingot
+
+// the FAVOR keyword is followed by the number of the Great Spirti it corresponds to:
+// BEAR    = 0
+// WOLF    = 1
+// EAGLE   = 2
+// SNAKE   = 3
+// FROG    = 4
+// SUN     = 5
+// MOON    = 6
+// TURTLE  = 7
+// REWARD FAVOR 6
+
+// the EGG keyword is followed by the dragon type number (0-6), then the quality number (0-3)
+// RED    = 0
+// GREEN  = 1
+// BLUE   = 2
+// WHITE  = 3
+// BLACK  = 4
+// GOLD   = 5
+// WONDER = 6
+// REWARD EGG 6 0
+
+// make sure this tag stays at the end of the file, so the parser has an easy way
+// of finding out when to stop.
+ENDOFFILE
+

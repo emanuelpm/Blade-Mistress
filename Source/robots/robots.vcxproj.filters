@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Network">
+      <UniqueIdentifier>{0eca3ada-69c0-49ec-9f62-e12d2f3d1662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Puma">
+      <UniqueIdentifier>{e9881229-151a-4620-8e51-c6d70ce96b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{2b6594e5-e825-4d56-8e65-7e47dc79cb51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Network\Client.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\GetIP.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\HoldingBuffer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\Iocp.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\IOCPServer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\IOCPSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\Server.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\SocketObject.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\TCPSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Network\UDPSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\basegenmode.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\d3dapp.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\d3dfont.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\d3dutil.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\dsutil.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\dxutil.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\gamemode.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\generatormode.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\Noise.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\plasmaTexture.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\puma.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\pumaAnim.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\pumaMainRobots.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\pumaMesh.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\pumaRawVerts.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\pumaSound.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\pumaVideoData.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_ArtTextButton.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_BigInfoWindow.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_ChatWindow.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_DragBar.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_DragEdge.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_EdgeBar.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_EditLine.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_ScrollWindow.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_TextBox.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_TextButton.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIR_Window.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Puma\UIRect.cpp">
+      <Filter>Puma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\AutoLog.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\BStream.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\crc.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\crypto.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\Dataobje.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\Debug.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\fileFind.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\GeneralUtils.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\Linklist.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\Mutex.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\tweakSystem.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\UniqueNames.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3DInfoRecord.cpp" />
+    <ClCompile Include="..\src\ArmyDead.cpp" />
+    <ClCompile Include="..\src\ArmyDragonArchMage.cpp" />
+    <ClCompile Include="..\src\ArmyDragonChaplain.cpp" />
+    <ClCompile Include="..\src\ArmyDragonOverlord.cpp" />
+    <ClCompile Include="..\src\ArmyDragons.cpp" />
+    <ClCompile Include="..\src\ArmyDuskWurm.cpp" />
+    <ClCompile Include="..\src\ArmyHalloween.cpp" />
+    <ClCompile Include="..\src\ArmySpiders.cpp" />
+    <ClCompile Include="..\src\avatarTexture.cpp" />
+    <ClCompile Include="..\src\backSound.cpp" />
+    <ClCompile Include="..\src\BBO-Sarmy.cpp" />
+    <ClCompile Include="..\src\BBO-SAutoQuest.cpp" />
+    <ClCompile Include="..\src\BBO-Savatar.cpp" />
+    <ClCompile Include="..\src\BBO-Sbomb.cpp" />
+    <ClCompile Include="..\src\BBO-SChainQuest.cpp" />
+    <ClCompile Include="..\src\BBO-Schest.cpp" />
+    <ClCompile Include="..\src\BBO-Sgen-dragons.cpp" />
+    <ClCompile Include="..\src\BBO-Sgen-nearvamps.cpp" />
+    <ClCompile Include="..\src\BBO-Sgen-orcclan.cpp" />
+    <ClCompile Include="..\src\BBO-Sgen-spirits.cpp" />
+    <ClCompile Include="..\src\BBO-Sgen-vamps.cpp" />
+    <ClCompile Include="..\src\BBO-Sgenerator.cpp" />
+    <ClCompile Include="..\src\BBO-SgroundEffect.cpp" />
+    <ClCompile Include="..\src\BBO-SInvadeQuest.cpp" />
+    <ClCompile Include="..\src\BBO-Smob.cpp" />
+    <ClCompile Include="..\src\BBO-Smonster.cpp" />
+    <ClCompile Include="..\src\BBO-SNewbGenerator.cpp" />
+    <ClCompile Include="..\src\BBO-Snpc.cpp" />
+    <ClCompile Include="..\src\BBO-Stower.cpp" />
+    <ClCompile Include="..\src\BBO-Stree.cpp" />
+    <ClCompile Include="..\src\BBO-SwarpPoint.cpp" />
+    <ClCompile Include="..\Src\BBO.cpp" />
+    <ClCompile Include="..\src\BBOclient.cpp" />
+    <ClCompile Include="..\src\BBOmob.cpp" />
+    <ClCompile Include="..\src\BBOpet.cpp" />
+    <ClCompile Include="..\src\BBOserver.cpp" />
+    <ClCompile Include="..\src\BBOShadows.cpp" />
+    <ClCompile Include="..\src\BBOSquare.cpp" />
+    <ClCompile Include="..\src\BBOstatic.cpp" />
+    <ClCompile Include="..\src\creditsMode.cpp" />
+    <ClCompile Include="..\src\DesignCharMode.cpp" />
+    <ClCompile Include="..\src\dungeon-map.cpp" />
+    <ClCompile Include="..\src\dungeonClient.cpp" />
+    <ClCompile Include="..\Src\FileTool.cpp" />
+    <ClCompile Include="..\src\firstOptionMode.cpp" />
+    <ClCompile Include="..\src\FlockPoints.cpp" />
+    <ClCompile Include="..\src\glowQuad.cpp" />
+    <ClCompile Include="..\src\ground-map.cpp" />
+    <ClCompile Include="..\src\groundObject.cpp" />
+    <ClCompile Include="..\src\groundObjectTiles.cpp" />
+    <ClCompile Include="..\src\groundtestmode.cpp" />
+    <ClCompile Include="..\src\instructionMode.cpp" />
+    <ClCompile Include="..\src\inventory.cpp" />
+    <ClCompile Include="..\src\IPBanList.cpp" />
+    <ClCompile Include="..\src\labyrinth-map.cpp" />
+    <ClCompile Include="..\src\labyrinthObject.cpp" />
+    <ClCompile Include="..\src\legalMode.cpp" />
+    <ClCompile Include="..\src\loginmode.cpp" />
+    <ClCompile Include="..\src\longtime.cpp" />
+    <ClCompile Include="..\src\mapList.cpp" />
+    <ClCompile Include="..\src\memory_helper.cpp" />
+    <ClCompile Include="..\src\meshRepository.cpp" />
+    <ClCompile Include="..\src\monsterData.cpp" />
+    <ClCompile Include="..\src\optionMode.cpp" />
+    <ClCompile Include="..\src\particle.cpp" />
+    <ClCompile Include="..\src\particle2.cpp" />
+    <ClCompile Include="..\src\particle3.cpp" />
+    <ClCompile Include="..\src\particleRot.cpp" />
+    <ClCompile Include="..\src\particleScale.cpp" />
+    <ClCompile Include="..\src\particleSmoke.cpp" />
+    <ClCompile Include="..\src\petSound.cpp" />
+    <ClCompile Include="..\src\PickCharMode.cpp" />
+    <ClCompile Include="..\src\pointGlow.cpp" />
+    <ClCompile Include="..\src\pointsprites.cpp" />
+    <ClCompile Include="..\src\questSystem.cpp" />
+    <ClCompile Include="..\src\realm-map.cpp" />
+    <ClCompile Include="..\src\realmObject.cpp" />
+    <ClCompile Include="..\Src\robot.cpp" />
+    <ClCompile Include="..\Src\robotMode.cpp" />
+    <ClCompile Include="..\src\sharedSpace.cpp" />
+    <ClCompile Include="..\src\simpleGrass.cpp" />
+    <ClCompile Include="..\src\simpleMessageMode.cpp" />
+    <ClCompile Include="..\src\staffData.cpp" />
+    <ClCompile Include="..\src\startNewCharMode.cpp" />
+    <ClCompile Include="..\src\tokenManager.cpp" />
+    <ClCompile Include="..\src\totemData.cpp" />
+    <ClCompile Include="..\src\tower-map.cpp" />
+    <ClCompile Include="..\src\traderGoods.cpp" />
+    <ClCompile Include="..\src\uidbanlist.cpp" />
+    <ClCompile Include="..\src\viewSkinMode.cpp" />
+    <ClCompile Include="..\src\wikiMode.cpp" />
+    <ClCompile Include="..\src\Helper\PasswordHash.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Helper\PBKDF2.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Network\Client.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\DisableWarnings.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\Fifo.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\GetIP.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\HoldingBuffer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\Iocp.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\IOCPServer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\IOCPSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\ISocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\ISocketHandler.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\NetSystem.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\NetWorldMessages.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\NetWorldRadio.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\Server.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\SocketObject.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\SOverlapped.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\TCPSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Network\UDPSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\version.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\basegenmode.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\d3dapp.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\d3dfont.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\d3dres.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\d3dutil.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\dsutil.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\dxutil.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\gamemode.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\generatormode.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\Noise.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\plasmaTexture.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\puma.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\pumaAnim.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\pumaMesh.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\pumaRawVerts.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\pumaSound.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\pumaVideoData.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_ArtTextButton.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_BigInfoWindow.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_ChatWindow.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_DragBar.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_DragEdge.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_EdgeBar.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_EditLine.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_ScrollWindow.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_TextBox.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_TextButton.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIR_Window.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\UIRect.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Puma\version.h">
+      <Filter>Puma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\AutoLog.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\BStream.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\crc.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\crypto.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\Dataobje.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\Debug.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\fileFind.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\GeneralUtils.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\Linklist.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\Mutex.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\tweakSystem.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\UniqueNames.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3dInfoRecord.h" />
+    <ClInclude Include="..\src\ArmyDead.h" />
+    <ClInclude Include="..\src\ArmyDragonArchMage.h" />
+    <ClInclude Include="..\src\ArmyDragonChaplain.h" />
+    <ClInclude Include="..\src\ArmyDragonOverlord.h" />
+    <ClInclude Include="..\src\ArmyDragons.h" />
+    <ClInclude Include="..\src\ArmyDuskWurm.h" />
+    <ClInclude Include="..\src\ArmyDuskWurn.h" />
+    <ClInclude Include="..\src\ArmyHalloween.h" />
+    <ClInclude Include="..\src\ArmySpiders.h" />
+    <ClInclude Include="..\src\avatarTexture.h" />
+    <ClInclude Include="..\src\backSound.h" />
+    <ClInclude Include="..\src\BBO-Sarmy.h" />
+    <ClInclude Include="..\src\BBO-SAutoQuest.h" />
+    <ClInclude Include="..\src\BBO-Savatar.h" />
+    <ClInclude Include="..\src\BBO-Sbomb.h" />
+    <ClInclude Include="..\src\BBO-SChainQuest.h" />
+    <ClInclude Include="..\src\BBO-Schest.h" />
+    <ClInclude Include="..\src\BBO-Sgen-dragons.h" />
+    <ClInclude Include="..\src\BBO-Sgen-nearvamps.h" />
+    <ClInclude Include="..\src\BBO-Sgen-orcclan.h" />
+    <ClInclude Include="..\src\BBO-Sgen-spirits.h" />
+    <ClInclude Include="..\src\BBO-Sgen-vamps.h" />
+    <ClInclude Include="..\src\BBO-Sgenerator.h" />
+    <ClInclude Include="..\src\BBO-SgroundEffect.h" />
+    <ClInclude Include="..\src\BBO-SInvadeQuest.h" />
+    <ClInclude Include="..\src\BBO-Smob.h" />
+    <ClInclude Include="..\src\BBO-Smonster.h" />
+    <ClInclude Include="..\src\BBO-SNewbGenerator.h" />
+    <ClInclude Include="..\src\BBO-Snpc.h" />
+    <ClInclude Include="..\src\BBO-Stower.h" />
+    <ClInclude Include="..\src\BBO-Stree.h" />
+    <ClInclude Include="..\src\BBO-SwarpPoint.h" />
+    <ClInclude Include="..\Src\BBO.h" />
+    <ClInclude Include="..\src\BBOclient.h" />
+    <ClInclude Include="..\src\BBOmob.h" />
+    <ClInclude Include="..\src\BBOpet.h" />
+    <ClInclude Include="..\src\BBOserver.h" />
+    <ClInclude Include="..\src\BBOShadows.h" />
+    <ClInclude Include="..\src\BBOSquare.h" />
+    <ClInclude Include="..\src\BBOstatic.h" />
+    <ClInclude Include="..\src\clientOnly.h" />
+    <ClInclude Include="..\src\creditsMode.h" />
+    <ClInclude Include="..\src\deleteConfirmMode.h" />
+    <ClInclude Include="..\src\DesignCharMode.h" />
+    <ClInclude Include="..\src\dungeon-map.h" />
+    <ClInclude Include="..\src\dungeonClient.h" />
+    <ClInclude Include="..\Src\FileTool.h" />
+    <ClInclude Include="..\src\firstOptionMode.h" />
+    <ClInclude Include="..\src\FlockPoints.h" />
+    <ClInclude Include="..\src\glowQuad.h" />
+    <ClInclude Include="..\src\ground-map.h" />
+    <ClInclude Include="..\src\groundObject.h" />
+    <ClInclude Include="..\src\groundObjectTiles.h" />
+    <ClInclude Include="..\src\groundtestmode.h" />
+    <ClInclude Include="..\src\instructionMode.h" />
+    <ClInclude Include="..\src\inventory.h" />
+    <ClInclude Include="..\src\IPBanList.h" />
+    <ClInclude Include="..\src\labyrinth-map.h" />
+    <ClInclude Include="..\src\labyrinthObject.h" />
+    <ClInclude Include="..\src\legalMode.h" />
+    <ClInclude Include="..\src\legaMode.h" />
+    <ClInclude Include="..\src\loginmode.h" />
+    <ClInclude Include="..\src\longtime.h" />
+    <ClInclude Include="..\src\mapList.h" />
+    <ClInclude Include="..\src\memory_helper.h" />
+    <ClInclude Include="..\src\meshRepository.h" />
+    <ClInclude Include="..\src\monsterData.h" />
+    <ClInclude Include="..\..\Puma\src\Noise.h" />
+    <ClInclude Include="..\src\optionMode.h" />
+    <ClInclude Include="..\src\particle.h" />
+    <ClInclude Include="..\src\particle2.h" />
+    <ClInclude Include="..\src\particle3.h" />
+    <ClInclude Include="..\src\particleRot.h" />
+    <ClInclude Include="..\src\particleScale.h" />
+    <ClInclude Include="..\src\particleSmoke.h" />
+    <ClInclude Include="..\src\petSound.h" />
+    <ClInclude Include="..\src\PickCharMode.h" />
+    <ClInclude Include="..\src\pointGlow.h" />
+    <ClInclude Include="..\src\pointsprites.h" />
+    <ClInclude Include="..\src\questSystem.h" />
+    <ClInclude Include="..\src\realm-map.h" />
+    <ClInclude Include="..\src\realmObject.h" />
+    <ClInclude Include="..\Src\robot.h" />
+    <ClInclude Include="..\Src\robotMode.h" />
+    <ClInclude Include="..\src\sharedSpace.h" />
+    <ClInclude Include="..\src\simpleGrass.h" />
+    <ClInclude Include="..\src\simpleMessageMode.h" />
+    <ClInclude Include="..\src\staffData.h" />
+    <ClInclude Include="..\src\startNewCharMode.h" />
+    <ClInclude Include="..\src\TileDefinitions.h" />
+    <ClInclude Include="..\src\tokenManager.h" />
+    <ClInclude Include="..\src\totemData.h" />
+    <ClInclude Include="..\src\tower-map.h" />
+    <ClInclude Include="..\src\traderGoods.h" />
+    <ClInclude Include="..\..\Helper\Src\tweakSystem.h" />
+    <ClInclude Include="..\src\uidbanlist.h" />
+    <ClInclude Include="..\src\viewSkinMode.h" />
+    <ClInclude Include="..\src\wikiMode.h" />
+    <ClInclude Include="..\src\Helper\PasswordHash.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Helper\PBKDF2.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

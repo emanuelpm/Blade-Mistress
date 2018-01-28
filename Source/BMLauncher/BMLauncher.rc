@@ -1,0 +1,283 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\BMLauncher.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\BMLauncher.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BMLAUNCHER_DIALOG DIALOGEX 0, 0, 213, 282
+STYLE DS_SETFONT | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Blade Mistress Launcher"
+MENU IDR_MENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         IDB_LOGO,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,216,36
+    GROUPBOX        "Server",IDC_STATIC,6,39,200,39
+    CONTROL         "Default Server",IDC_RADIO_SERVER_DEFAULT,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,58,49,87,10
+    GROUPBOX        "Display Settings",IDC_STATIC,7,85,197,90
+    CONTROL         "&Fullscreen",IDC_RADIO_FULLSCREEN,"Button",BS_AUTORADIOBUTTON | WS_GROUP,29,100,56,10
+    CONTROL         "&Windowed",IDC_RADIO_WINDOWED,"Button",BS_AUTORADIOBUTTON,103,100,81,9
+    LTEXT           "Resolution:",IDC_STATIC,57,118,50,11
+    CONTROL         "640x480",IDC_RADIO_640,"Button",BS_AUTORADIOBUTTON | WS_GROUP,71,131,72,8
+    CONTROL         "800x600",IDC_RADIO_800,"Button",BS_AUTORADIOBUTTON,71,140,80,10
+    CONTROL         "1024x768",IDC_RADIO_1024,"Button",BS_AUTORADIOBUTTON,71,151,84,8
+    CONTROL         "1600x1200",IDC_RADIO_1600,"Button",BS_AUTORADIOBUTTON,71,161,72,8
+    GROUPBOX        "Login Information",IDC_STATIC,7,185,195,74
+    CTEXT           "NOTE: You will be prompted to create an account if the name you enter is not taken.",IDC_STATIC,13,198,174,19
+    LTEXT           "Account Name:",IDC_STATIC,25,220,50,8
+    EDITTEXT        IDC_EDIT_ACCOUNT,83,219,86,12,ES_AUTOHSCROLL
+    LTEXT           "Password:",IDC_STATIC,39,234,36,12
+    EDITTEXT        IDC_EDIT_PASSWORD,83,233,86,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&Launch",IDC_BUTTON_LAUNCH,155,264,50,14
+    PUSHBUTTON      "E&xit",IDC_BUTTON_EXIT,8,264,50,14
+    PUSHBUTTON      "&Update",IDC_BUTTON_UPDATE,82,264,50,14
+END
+
+IDD_UPDATE_DIALOG DIALOG 0, 0, 305, 233
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Updating Blade Mistress"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",ID_CLOSE,7,212,291,14,WS_DISABLED
+    CONTROL         "",IDC_TEXT,"RICHEDIT",TCS_HOTTRACK | TCS_RAGGEDRIGHT | TCS_MULTISELECT | WS_BORDER | WS_VSCROLL | WS_TABSTOP,7,7,291,200
+END
+
+IDD_README_DIALOG DIALOG 0, 0, 343, 263
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,151,242,50,14
+    CONTROL         "",IDC_TEXT,"RICHEDIT",TCS_HOTTRACK | TCS_MULTISELECT | WS_BORDER | WS_VSCROLL | WS_TABSTOP,7,7,329,229
+END
+
+IDD_ABOUT_DIALOG DIALOGEX 0, 0, 183, 41
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About..."
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,126,20,50,14
+    LTEXT           "Blade Mistress Launcher",IDC_LAUNCHER_TEXT,7,7,119,13
+    LTEXT           "©2013 Blade Mistress Online",IDC_STATIC,7,22,103,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,0,1
+ PRODUCTVERSION 1,1,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "Blade Mistress Online"
+            VALUE "FileDescription", "BMLauncher MFC Application"
+            VALUE "FileVersion", "1, 1, 0, 1"
+            VALUE "InternalName", "BMLauncher"
+            VALUE "LegalCopyright", "Copyright (C) 2013 Blade Mistress Online"
+            VALUE "OriginalFilename", "BMLauncher.EXE"
+            VALUE "ProductName", "BMLauncher Application"
+            VALUE "ProductVersion", "1, 1, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOGO                BITMAP                  "res\\Logo.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_BMLAUNCHER_DIALOG, DIALOG
+    BEGIN
+    END
+
+    IDD_UPDATE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 298
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 226
+    END
+
+    IDD_README_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 336
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 256
+    END
+
+    IDD_ABOUT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 34
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Launch",                     ID_MENU_LAUNCH
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_MENU_EXIT
+    END
+    POPUP "&Links"
+    BEGIN
+        MENUITEM "&Documentation",              ID_MENU_WIKI
+        MENUITEM "&Forums",                     ID_MENU_FORUM
+        MENUITEM "&Website",                    ID_MENU_WEBSITE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Readme.txt",                 ID_MENU_README
+        MENUITEM SEPARATOR
+        MENUITEM "&About",                      ID_MENU_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_BMLAUNCHER_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\BMLauncher.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

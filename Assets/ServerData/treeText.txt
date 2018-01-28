@@ -1,0 +1,27 @@
+TREE BEAR
+Although green and black magic seems to be fading, I feel a new magics growing.  Not all feel good, though…
+TREE WOLF 
+Have you noticed the changes?  The monsters... They don't seem to be quite the same..
+TREE EAGLE
+Remember, there is strength in numbers.  Do not venture out alone in these hard times.
+TREE SNAKE
+Hissss.. power, I feel, is leaving this land.  Something will happen, something grand.
+TREE FROG
+We must stick togather to survive.
+TREE SUN
+I feel my Mistress's power dwindling.  What is overpowering her?
+TREE MOON 
+Why must there be evil?
+TREE TURTLE
+Are you preparing properly as the world is changing? Some seem to have the wrong priorities...
+TREE EVIL
+There MUST be evil.
+TREE TOWNMAGE1
+Something is clouding my magic ability.  It seems the other mages are also feeling weeker.  Please, seek out the cause of this and let us all know.  I fear, it cannot be good.
+TREE TOWNMAGE2
+Have you heard?  It seems that a new portal will soon glow green in the labyrinth, just as foretold.  Heed my warnings, it will be very dangerous inside.  Entering may lead to your demise.
+TREE TOWNMAGE3
+It seems you have noticed the magics fading as well.  Help us gauge this threat and defeat it.  Or, are you not strong enough?
+TREE TOWNMAGE4
+It's.. it's getting closer.  I can feel it.  My powers have faded, and I cannot tell what it is.  I do feel it strongest in the waste lands.  But, it is getting ever closer.
+TREE END

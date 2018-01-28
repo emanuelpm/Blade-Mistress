@@ -1,0 +1,64 @@
+// FORMAT
+// TYPE    mass      value
+// NAME OF ITEM
+// for blades
+//     damage-done  to-hit  length of blade red green blue
+// for ingots
+//     damage-Value challenge red green blue
+
+
+SIMPLE 1.0 1.0
+Worthless Rock
+
+BLADE 1.0 10.0
+Imperial Dirk
+1 1 1.0 128 128 128
+
+BLADE 2.0 20.0
+Imperial Knife
+2 1 1.2 255 0 0
+
+BLADE 4.0 40.0
+Imperial Short Sword
+4 1 1.4 0 0 200
+
+BLADE 8.0 150.0
+Imperial Sword
+8 1 1.6 128 128 128
+
+BLADE 16.0 350.0
+Imperial Long Sword
+12 1 2.0 128 128 128
+
+BLADE 24.0 1000.0
+Imperial Great Sword
+16 1 2.4 128 128 128
+
+INGOT 1.0 1.0
+Tin Ingot
+1.0 1.0 128 128 128
+
+INGOT 1.0 5.0
+Aluminum Ingot
+2.0 2.0 168 168 168
+
+INGOT 1.0 15.0
+Steel Ingot
+3.0 3.0 228 128 128
+
+INGOT 1.0 50.0
+Carbon Ingot
+4.0 4.0 128 128 228
+
+INGOT 1.0 250.0
+Zinc Ingot
+5.0 5.0 128 228 128
+
+INGOT 1.0 1000.0
+Adamantium Ingot
+6.0 6.0 028 028 048
+
+INGOT 1.0 10000.0
+Mithril Ingot
+7.0 7.0 228 228 228
+
