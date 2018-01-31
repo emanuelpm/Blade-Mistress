@@ -18,6 +18,9 @@ Building requires Visual Studio 2017 and has only been tested on Windows 10 64bi
 * Windows 8.1 SDK
 * MFC and ATL support
 
+# Deploying
+The Scripts directory has 2 scripts, one that creates a Client folder heirarchy and one that creates a Server heirarchy.  Both require Release executables to be built.  The Client structure is also what is used by the Update system. The contents of StagingFilesClient can go on any web server, in any sub folder.  That full URL should then be used in the Launcher as the update URL.
+
 # Contribution Ideas
 If you would like to add to the codebase, here are some things that would be useful :)
 
