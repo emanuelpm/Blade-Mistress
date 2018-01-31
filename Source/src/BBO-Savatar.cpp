@@ -1737,14 +1737,15 @@ int BBOSAvatar::LoadAccount(char *n, char *p, int isNew, int justLoad)
 		sprintf_s((char*)&salt[0], 256, "%s-%s", "BladeMistress", tempName);
 
 		// Hash the password
-		unsigned char hashPass[HASH_BYTE_SIZE] = { 0 };
+		// Need to add 1 to null terminate for the CreateSerializableHash below
+		unsigned char hashPass[HASH_BYTE_SIZE + 1] = { 0 };
 		if (!PasswordHash::CreateStandaloneHash((const unsigned char*)tempText, salt, 6969, hashPass))
 		{
 			fclose(fp);
 			return 2;
 		}
 
-		if (!PasswordHash::CreateSerializableHash((unsigned char*)&tempPass[0], hashPass))
+		if (!PasswordHash::CreateSerializableHash(hashPass, (unsigned char*)&tempPass[0]))
 		{
 			fclose(fp);
 			return 2;
