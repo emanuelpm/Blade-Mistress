@@ -13,7 +13,10 @@ The game had unique features for the time, such as:
 Even after almost 20 years, there are still players interested in playing and modifying the game, which is humbling.  And so we have decided to release this code into the public domain so they could add new features and fix bugs.
 
 # Buliding
-Building requires Visual Studio 2017 and has only been tested on Windows 10 64bit.
+Building requires Visual Studio 2017 and has only been tested on Windows 10 64bit.  The following components need to be installed:
+
+* Windows 8.1 SDK
+* MFC and ATL support
 
 # Contribution Ideas
 If you would like to add to the codebase, here are some things that would be useful :)
