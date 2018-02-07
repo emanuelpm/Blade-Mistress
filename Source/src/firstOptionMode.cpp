@@ -1112,7 +1112,7 @@ void FirstOptionMode::HandleMessages(void)
                 MessPlayerReturning messPlayerReturning;
 
                 CorrectString(nameBuffer);
-                CorrectString(passBuffer);
+
                 sprintf_s(messPlayerReturning.name, NUM_OF_CHARS_FOR_USERNAME, "%s", nameBuffer);
 
                 unsigned char salt[256];

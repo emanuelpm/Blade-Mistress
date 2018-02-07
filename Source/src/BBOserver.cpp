@@ -2745,7 +2745,6 @@ void BBOServer::HandleMessages(void)
             GuaranteeTermination(mpNewPtr->name, NUM_OF_CHARS_FOR_USERNAME);
             CorrectString(mpNewPtr->name);
             GuaranteeTermination(mpNewPtr->pass, NUM_OF_CHARS_FOR_PASSWORD);
-            CorrectString(mpNewPtr->pass);
 
             if (uidBanList->IsBanned(mpNewPtr->uniqueId))
             {
@@ -2809,7 +2808,6 @@ void BBOServer::HandleMessages(void)
             GuaranteeTermination(mpReturningPtr->name, NUM_OF_CHARS_FOR_USERNAME);
             CorrectString(mpReturningPtr->name);
             GuaranteeTermination(mpReturningPtr->pass, NUM_OF_CHARS_FOR_PASSWORD);
-            CorrectString(mpReturningPtr->pass);
 
             if (uidBanList->IsBanned(mpReturningPtr->uniqueId))
             {
@@ -8938,54 +8936,75 @@ void BBOServer::HandleChatLine(int fromSocket, char *chatText)
                 }
             }
             //***************************************
-            else if ( IsSame(&(chatText[argPoint]) , "/passchange"))
-            {
-                argPoint = NextWord(chatText,&linePoint);
+			else if (IsSame(&(chatText[argPoint]), "/passchange"))
+			{
+				argPoint = NextWord(chatText, &linePoint);
 
-                if (argPoint == linePoint)
-                {
-                    MessInfoText infoText;
-                    CopyStringSafely("USAGE: /passchange <old password> <new password>", 
-                                          200, infoText.text, MESSINFOTEXTLEN);
-                    lserver->SendMsg(sizeof(infoText),(void *)&infoText, 0, &tempReceiptList);
-                }
-                else
-                {
-                    sscanf(&chatText[argPoint], "%s", tempText);
-                    if (IsCompletelySame(tempText, curAvatar->pass))
-                    {
-                        argPoint = NextWord(chatText,&linePoint);
-                        sscanf(&chatText[argPoint], "%s", tempText);
-                        GuaranteeTermination(tempText, 12);
-                        CorrectString(tempText);
+				if (argPoint == linePoint)
+				{
+					MessInfoText infoText;
+					CopyStringSafely("USAGE: /passchange <old password> <new password>",
+						200, infoText.text, MESSINFOTEXTLEN);
+					lserver->SendMsg(sizeof(infoText), (void *)&infoText, 0, &tempReceiptList);
 
-                        if (strlen(tempText) > 0)
-                        {
-                            sprintf(curAvatar->pass, tempText);
-                            curAvatar->passLen = strlen(curAvatar->pass);
+				}
+				else
+				{
+					sscanf(&chatText[argPoint], "%s", tempText);
 
-                            sprintf(&(tempText[2]),"Your password is changed to %s.",
-                                curAvatar->pass);
-                            tempText[0] = NWMESS_PLAYER_CHAT_LINE;
-                            tempText[1] = TEXT_COLOR_DATA;
-    
-                            lserver->SendMsg( strlen(tempText) + 1,(void *)&tempText, 0, &tempReceiptList);
-                        }
-                        else
-                        {
-                            CopyStringSafely("new password is too short.", 
-                                          200, infoText.text, MESSINFOTEXTLEN);
-                            lserver->SendMsg(sizeof(infoText),(void *)&infoText, 0, &tempReceiptList);
-                        }
-                    }
-                    else
-                    {
-                        CopyStringSafely("That's not the correct old password.", 
-                                      200, infoText.text, MESSINFOTEXTLEN);
-                        lserver->SendMsg(sizeof(infoText),(void *)&infoText, 0, &tempReceiptList);
-                    }
-                }
-            }
+					// hash the old password.
+					unsigned char salt[256];
+					sprintf_s((char*)&salt[0], 256, "%s-%s", "BladeMistress", curAvatar->name);
+					unsigned char hashPass[HASH_BYTE_SIZE + 1] = { 0 };
+					unsigned char hashPass2[HASH_BYTE_SIZE + 1] = { 0 };
+					PasswordHash::CreateStandaloneHash((const unsigned char*)tempText, salt, 6969, hashPass);
+
+					unsigned char tempPass[OUT_HASH_SIZE + 1] = { 0 };
+					unsigned char tempPass2[OUT_HASH_SIZE + 1] = { 0 };
+					PasswordHash::CreateSerializableHash(hashPass, (unsigned char*)&tempPass[0]);
+
+					if (PasswordHash::ValidateSerializablePassword(hashPass, (const unsigned char*)curAvatar->pass))
+					{
+						argPoint = NextWord(chatText, &linePoint);
+						sscanf(&chatText[argPoint], "%s", tempText);
+						GuaranteeTermination(tempText, 12);
+						CorrectString(tempText);
+
+						char tempTextp[1028] = { 0 };
+						strncpy(tempTextp, tempText, sizeof tempTextp - 1);
+						PasswordHash::CreateStandaloneHash((const unsigned char*)tempText, salt, 6969, hashPass2);
+						PasswordHash::CreateSerializableHash(hashPass2, (unsigned char*)&tempPass2[0]);
+
+						if (strlen(tempText) > 0)
+						{
+							sprintf(curAvatar->pass, (const char*)tempPass2);
+							curAvatar->passLen = strlen(curAvatar->pass);
+
+							sprintf(&(tempText[2]), "Your password is changed to %s.",
+								tempTextp);
+
+							tempText[0] = NWMESS_PLAYER_CHAT_LINE;
+							tempText[1] = TEXT_COLOR_DATA;
+
+							lserver->SendMsg(strlen(tempText) + 1, (void *)&tempText, 0, &tempReceiptList);
+						}
+						else
+						{
+							CopyStringSafely("new password is too short.",
+								200, infoText.text, MESSINFOTEXTLEN);
+
+							lserver->SendMsg(sizeof(infoText), (void *)&infoText, 0, &tempReceiptList);
+						}
+					}
+					else
+					{
+						CopyStringSafely("That's not the correct old password.",
+							200, infoText.text, MESSINFOTEXTLEN);
+
+						lserver->SendMsg(sizeof(infoText), (void *)&infoText, 0, &tempReceiptList);
+					}
+				}
+			}
             //***************************************
             else if ( IsSame(&(chatText[argPoint]) , "/setguildstats")
                          && (ACCOUNT_TYPE_ADMIN == curAvatar->accountType)
