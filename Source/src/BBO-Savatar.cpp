@@ -1550,11 +1550,12 @@ int BBOSAvatar::LoadAccount(char *n, char *p, int isNew, int justLoad)
     if (!justLoad)
         assert(p);
 
+    if (NULL == p || NULL == n)
+        return -1;
+
 	const size_t nLen = strlen(n);
 	const size_t pLen = strlen(p);
-    if (	NULL == p || 
-            NULL == n ||
-			nLen <= 0 ||
+    if (	nLen <= 0 ||
 			nLen >= NUM_OF_CHARS_FOR_USERNAME ||
 			pLen >= NUM_OF_CHARS_FOR_PASSWORD ||
 			pLen <= 0 )

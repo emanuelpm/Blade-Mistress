@@ -1,14 +1,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BBonline", "BBonline.vcxproj", "{FE87D823-6335-4922-BC76-6CAFF49AAC4F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BMLauncher", "BMLauncher\BMLauncher.vcxproj", "{5C15C596-FC7E-42D2-9B41-BEDC4CC576F5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IndexMaker", "IndexMaker\IndexMaker.vcxproj", "{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NameRipper", "NameRipper\NameRipper.vcxproj", "{11EE670B-455E-48A2-B5A8-DA91EA387013}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerWrapper", "ServerWrapper\ServerWrapper.vcxproj", "{703CA09B-B14E-47DE-B80B-B69808A92F92}"
 EndProject
@@ -53,10 +51,6 @@ Global
 		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Debug|Win32.Build.0 = Debug|Win32
 		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Release|Win32.ActiveCfg = Release|Win32
 		{0AB61DC2-F6DA-4EA5-9D90-53D41519D156}.Release|Win32.Build.0 = Release|Win32
-		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Debug|Win32.ActiveCfg = Debug|Win32
-		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Debug|Win32.Build.0 = Debug|Win32
-		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Release|Win32.ActiveCfg = Release|Win32
-		{11EE670B-455E-48A2-B5A8-DA91EA387013}.Release|Win32.Build.0 = Release|Win32
 		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Debug|Win32.ActiveCfg = Debug|Win32
 		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Debug|Win32.Build.0 = Debug|Win32
 		{703CA09B-B14E-47DE-B80B-B69808A92F92}.Release|Win32.ActiveCfg = Release|Win32
