@@ -1,15 +1,11 @@
-#include <windows.h>
-#include <windowsx.h>
 #include <fstream>
 #include <ios>
-//#include <stdio.h>
-//#include <stdlib.h>
-#include <assert.h>
+#include <cassert>
 
 #define MAX_BUFFER_SIZE	4096
 
 // Static CRC table
-DWORD s_arrdwCrc32Table[256] =
+unsigned long s_arrdwCrc32Table[256] =
 {
 	0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA,
 	0x076DC419, 0x706AF48F, 0xE963A535, 0x9E6495A3,
@@ -81,37 +77,38 @@ DWORD s_arrdwCrc32Table[256] =
 };
 
 //***********************************************
-void CalcCrc32(const BYTE byte, DWORD &dwCrc32)
+void CalcCrc32(const unsigned char byte, unsigned long& crc32Out)
 {
-	dwCrc32 = ((dwCrc32) >> 8) ^ s_arrdwCrc32Table[(byte) ^ ((dwCrc32) & 0x000000FF)];
+    crc32Out = ((crc32Out) >> 8) ^ s_arrdwCrc32Table[(byte) ^ ((crc32Out) & 0x000000FF)];
 }
 
-//***********************************************
-DWORD GetCRC(char * szFilename, DWORD &dwCrc32)
+// return 0L for no error, 23L for and error
+unsigned long GetCRC(char * fileName, unsigned long& crc32Out)
 {
-	assert(szFilename);
-	assert(lstrlen(szFilename));
+	assert(fileName);
+	assert(lstrlen(fileName));
 
 
-	DWORD dwErrorCode = NO_ERROR;
+    unsigned long errorCode = 0L;
 	std::ifstream file;
 
-	dwCrc32 = 0xFFFFFFFF;
+    crc32Out = 0xFFFFFFFF;
 
 	try
 	{
 		// Open the file
-		file.open( szFilename, std::ios::in | std::ios::binary );
+		file.open(fileName, std::ios::in | std::ios::binary );
 
 		if(file.is_open())
 		{
 			char buffer[MAX_BUFFER_SIZE];
-			int nLoop, nCount;
-			nCount = file.read(buffer, sizeof(buffer)).gcount();
+            int nLoop{ 0 }, nCount{ 0 };
+
+            nCount = file.read(buffer, sizeof(buffer)).gcount();
 			while(nCount)
 			{
 				for(nLoop = 0; nLoop < nCount; nLoop++)
-					CalcCrc32(buffer[nLoop], dwCrc32);
+					CalcCrc32(buffer[nLoop], crc32Out);
 				nCount = file.read(buffer, sizeof(buffer)).gcount();
 			}
 
@@ -121,73 +118,43 @@ DWORD GetCRC(char * szFilename, DWORD &dwCrc32)
 	catch(...)
 	{
 		// An unknown exception happened
-		dwErrorCode = ERROR_CRC;
+        errorCode = 23L;
 	}
 
 	if(file.is_open()) file.close();
 
-	dwCrc32 = ~dwCrc32;
+    crc32Out = ~crc32Out;
 
-	return dwErrorCode;
-	/*
-	DWORD dwErrorCode = NO_ERROR;
-	HANDLE hFile = NULL;
-
-	dwCrc32 = 0xFFFFFFFF;
-
-	try
-	{
-		// Open the file
-		hFile = CreateFile(szFilename,
-			GENERIC_READ,
-			FILE_SHARE_READ,
-			NULL,
-			OPEN_EXISTING,
-			FILE_ATTRIBUTE_ARCHIVE | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_SYSTEM | FILE_FLAG_SEQUENTIAL_SCAN,
-			NULL);
-		if(hFile == INVALID_HANDLE_VALUE)
-			dwErrorCode = GetLastError();
-		else
-		{
-			BYTE buffer[MAX_BUFFER_SIZE];
-			DWORD dwBytesRead, dwLoop;
-			BOOL bSuccess = ReadFile(hFile, buffer, sizeof(buffer), &dwBytesRead, NULL);
-			while(bSuccess && dwBytesRead)
-			{
-				for(dwLoop = 0; dwLoop < dwBytesRead; dwLoop++)
-					CalcCrc32(buffer[dwLoop], dwCrc32);
-				bSuccess = ReadFile(hFile, buffer, sizeof(buffer), &dwBytesRead, NULL);
-			}
-		}
-	}
-	catch(...)
-	{
-		// An unknown exception happened
-		dwErrorCode = ERROR_CRC;
-	}
-
-	if(hFile != NULL) CloseHandle(hFile);
-
-	dwCrc32 = ~dwCrc32;
-
-	return dwErrorCode;
-	*/
+	return errorCode;
 }
 
-
-//***********************************************
-DWORD GetCRCForString(char * string)
+unsigned long GetCRCForString(char * string)
 {
 	assert(string);
 	assert(lstrlen(string));
 
-	DWORD dwCrc32 = 0xFFFFFFFF;
-
+    unsigned long dwCrc32 = 0xFFFFFFFF;
 	for(int nLoop = 0; nLoop < strlen(string); ++nLoop)
 		CalcCrc32(string[nLoop], dwCrc32);
 
 	return dwCrc32;
 }
 
+unsigned long GetCRC(std::string fileName, unsigned long& crc32Out)
+{
+    return GetCRC((char*)fileName.c_str(), crc32Out);
+}
 
-/* end of file */
+unsigned long GetCRCForString(std::string string)
+{
+    assert(string);
+    assert(string.size());
+
+    unsigned long dwCrc32 = 0xFFFFFFFF;
+    for (int nLoop = 0; nLoop < string.size(); ++nLoop)
+        CalcCrc32(string[nLoop], dwCrc32);
+
+    return dwCrc32;
+}
+
+

@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #include <wininet.h>
 #include <process.h>
+#include <chrono>
+#include <iostream>
+#include <istream>
+#include <streambuf>
+#include <string>
 
 #include "Autoupdate.h"
 #include "UpdateServer.h"
@@ -104,8 +109,12 @@ void AutoUpdate::ProcessDirectory(DoublyLinkedList *recList, char* dir)
 				DWORD crcResult = GetCRC(tempText, dwCrc32);
 //				assert(!crcResult);
 
+                ULARGE_INTEGER ull;
+                ull.LowPart = written.dwLowDateTime;
+                ull.HighPart = written.dwHighDateTime;
+
 				FileRecord *fr = new FileRecord(0,tempText);
-				fr->time = written;
+				fr->time = ull.QuadPart / 10000000ULL - 11644473600ULL;
 				fr->size = dwCrc32; //size;
 				recList->Append(fr);
 			}
@@ -129,24 +138,30 @@ void AutoUpdate::ProcessIndexData(DoublyLinkedList *list, char *data, DWORD leng
 {
 	char *curPtr = data;
 	char *endPtr = data + length;
-	char tempText[1024];
-	short size = 1;
+    short size{ 1 };
 
+    // for writing of this see IndexMaker.cpp :: ProcessDirectory
 	while (curPtr < endPtr)
 	{
+        /* ---- FORMAT ----
+        *  - relative path length
+        *  - "tagged" relative path
+        *  - last modified time
+        *  - cyclical redundancy check
+        */
 		memcpy(&size,curPtr,2);
 		curPtr += 2;
 		if (size != -1)
 		{
+            std::string tempText(size+1, '\0');
 			memcpy(&tempText,curPtr,size);
-			tempText[size] = 0;
 			tempText[3] -= 1;
 			curPtr += size;
-			FileRecord *fr = new FileRecord(0,tempText);
-			memcpy(&(fr->time),curPtr,sizeof(FILETIME));
-			curPtr += sizeof(FILETIME);
-			memcpy(&(fr->size),curPtr,sizeof(DWORD));
-			curPtr += sizeof(DWORD);
+			FileRecord *fr = new FileRecord(0,(char*)tempText.c_str());
+			memcpy(&(fr->time),curPtr, sizeof(std::time_t));
+			curPtr += sizeof(std::time_t);
+			memcpy(&(fr->size),curPtr, sizeof(unsigned long));
+			curPtr += sizeof(unsigned long);
 			list->Append(fr);
 		}
 	}
@@ -204,11 +219,6 @@ int AutoUpdate::DownloadFile(char *fileName)
 
 		if (hURL)
 		{
-	//		DWORD fileSize;
-	//		InternetQueryDataAvailable( hURL, &fileSize,0,0);
-
-	//		cBuffer = new char[fileSize];
-
 			// create output file
 			sprintf_s(tempText,1024,"%s\\%s",m_updateServer.pszServerName, fileName);
 			int index = strlen(tempText);
@@ -308,6 +318,7 @@ void AutoUpdate::Update()
 				tempText,   // URL to access
 				NULL, 0, 0, 0);               // defaults
 
+    // Closely related to IndexMaker.cpp :: ProcessDirectory
 	DWORD fileSize;
 	InternetQueryDataAvailable( hURL, &fileSize,0,0);
 
@@ -348,19 +359,6 @@ void AutoUpdate::Update()
 			if (frLocal->size != frMaster->size)
 				if (!DownloadFile(frMaster->WhoAmI()))
 					++errorCount;
-/*
-			txtBox += "checking %s (%ld vs remote %ld\n",
-				frLocal->do_name, frLocal->time.dwHighDateTime, frMaster->time.dwHighDateTime);
-			if (CompareFileTime(&(frLocal->time), &(frMaster->time)) < 0)
-			{ 
-				// copy the new version from the website
-				if (!DownloadFile(frMaster->WhoAmI()))
-					++errorCount;
-			}
-			else if (frLocal->size != frMaster->size)
-				if (!DownloadFile(frMaster->WhoAmI()))
-					++errorCount;
-*/
 		}
 		else
 		{

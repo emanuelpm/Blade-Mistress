@@ -10,6 +10,8 @@
 #include "BMLauncher.h"
 #include "BMUpdater.h"
 
+#include <chrono>
+
 struct UpdateServer;
 
 //***************************************************************************************
@@ -21,7 +23,7 @@ public:
 	FileRecord(int doid, char *doname);
 	virtual ~FileRecord();
 
-	FILETIME time;
+    std::time_t time;
 	DWORD size;
 };
 

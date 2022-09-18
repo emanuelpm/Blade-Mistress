@@ -1,105 +1,15 @@
-// IndexMaker.cpp : Defines the entry point for the console application.
-//
-
-#include <windows.h>
-#include <windowsx.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-
-#include "stdafx.h"
-#include "..\src\helper\fileFind.h"
+#include "stdafx.h" // do we *reallly* need this precompiled-header?
 #include "..\src\helper\crc.h"
 
-#include "../src/helper/PasswordHash.h"
-#include "../src/helper/PBKDF2.h"
+#include <filesystem>
+#include <iostream>
+#include <chrono>
+#include <fstream>
+#include <cassert>
 
+void PrintUsage();
+void ProcessDirectory(std::filesystem::path directory, std::ostream* outStream);
 
-//*********************************************************************
-void ProcessDirectory(char* root, char* dir, FILE * outputFile)
-{
-    char tempText[1024];
-
-    sprintf_s(tempText, 1024, "%s\\%s\\*",root, dir);
-
-    FileNameList *list = GetNameList(tempText, "");
-
-    for (int i = 0; i < list->numOfFiles; ++i)
-    {
-        // looking for a period, which would indicate a file
-        int isFile = FALSE;
-        for (int j = 0; j < (int) strlen(list->nameList[i].name); ++j)
-        {
-            if ('.' == list->nameList[i].name[j])
-                isFile = TRUE;
-        }
-
-        if (isFile)
-        {
-            if (!strncmp(".",list->nameList[i].name,1))
-                ;
-            else if (!strncmp("..",list->nameList[i].name,2))
-                ;
-            else
-            {
-                sprintf_s(tempText,1024,"%s\\%s\\%s",root,dir,list->nameList[i].name);
-                HANDLE tempFile = CreateFile(tempText,GENERIC_READ,0, NULL, OPEN_EXISTING,
-                             FILE_ATTRIBUTE_NORMAL, NULL);
-
-                if (!tempFile)
-                {
-                    printf("Unable to open %s to get its time.\n",tempText);
-                    exit(-1);
-                }
- 
-                FILETIME created, accessed, written;
-                if (!GetFileTime(	tempFile, &created, &accessed, &written))
-                {
-                    printf("Unable to get time info for %s.\n",tempText);
-                    exit(-1);
-                }
-
-//				DWORD fileSize = GetFileSize( tempFile, NULL ); // NULL is for high-order size
-
-                // close down file
-                CloseHandle(tempFile);
-
-                DWORD dwCrc32;
-                DWORD crcResult = GetCRC(tempText, dwCrc32);
-                assert(!crcResult);
-
-                sprintf_s(tempText,1024,"%s\\%s",dir,list->nameList[i].name);
-
-                short size = strlen(tempText);
-                fwrite(&size, 2,1, outputFile);
-                tempText[3] += 1;  // tag offset
-                fwrite(tempText, size,1, outputFile);
-                fwrite(&written, sizeof(FILETIME),1, outputFile);
-//				fwrite(&fileSize, sizeof(DWORD),1, outputFile);
-                fwrite(&dwCrc32, sizeof(DWORD),1, outputFile);
-                printf("%s\n",tempText);
-            }
-        }
-        else
-        {
-            sprintf_s(tempText,1024,"%s\\%s",dir,list->nameList[i].name);
-            ProcessDirectory(root, tempText, outputFile);
-        }
-
-    }
-
-    delete list;
-
-}
-
-void PrintUsage()
-{
-    printf("Usage: IndexMaker.exe <dir> <out file>\n");
-    printf("   <dir> : Path to directory containing the update structure\n");
-    printf("   <out file> : Path and name of the output file (usually called index.dat)\n\n");
-}
-
-//*********************************************************************
 int main(int argc, char* argv[])
 {
     if (argc != 3)
@@ -108,20 +18,68 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    FILE *fp = fopen(argv[2],"wb");
-    if (!fp)
+    std::ofstream outFile;
+    outFile.open(argv[2], std::ios::out | std::ios::binary | std::ios::trunc);
+    if (outFile.fail())
     {
-        printf("Unable to open output file %s\n\n", argv[2]);
+        std::cout << "Unable to open output file " << argv[2] << "\n\n";
         PrintUsage();
         return -1;
     }
 
-    ProcessDirectory(argv[1], ".", fp);
+    ProcessDirectory(std::filesystem::path{ argv[1] }, &outFile);
 
     short size = -1;
-    fwrite(&size, 2, 1, fp);
+    outFile.write(reinterpret_cast<char*>(&size), 2);
+    outFile.close();
 
-    fclose(fp);
-    
     return 0;
+}
+
+
+void PrintUsage()
+{
+    std::cout << "Usage: IndexMaker.exe <dir> <out file>\n"
+              << "   <dir> : Path to directory containing the update structure\n"
+              << "   <out file> : Path and name of the output file (usually called index.dat)\n\n";
+}
+
+
+void ProcessDirectory(const std::filesystem::path rootDirectory, std::ostream* outStream) {
+    // fpr reading of this, see AutoUpdate::ProcessIndexData and AutoUpdate::ProcessDirectory
+    for (const auto& dirEntry : std::filesystem::recursive_directory_iterator(rootDirectory)) {
+        if (dirEntry.is_regular_file()) {
+            // get relative path from the directory we're processing
+            std::filesystem::path relativeFilePath = std::filesystem::relative(dirEntry.path(), rootDirectory);
+
+            // get the last modified time of the file
+            using namespace std::chrono;
+            auto sctp = time_point_cast<system_clock::duration>(dirEntry.last_write_time() - std::filesystem::file_time_type::clock::now() + system_clock::now());
+            std::time_t writtenTime = system_clock::to_time_t(sctp);
+
+            // generate cyclical redundancy check
+            unsigned long crc32;
+            unsigned long crcResult = GetCRC(dirEntry.path().string(), crc32);
+            assert(!crcResult);
+
+            // let the people know what the haps is
+            std::cout << relativeFilePath << "\n";
+
+            /* ---- FORMAT ----
+            *  - relative path length
+            *  - "tagged" relative path
+            *  - last modified time
+            *  - cyclical redundancy check
+            */
+            std::string pathString = relativeFilePath.string();
+            short pathSize = pathString.size();
+            outStream->write(reinterpret_cast<char*>(&pathSize), 2);
+
+            pathString[3] += 1;  // tag offset
+            outStream->write(reinterpret_cast<char*>(&pathString), pathSize);
+
+            outStream->write(reinterpret_cast<char*>(&writtenTime), sizeof(std::time_t));
+            outStream->write(reinterpret_cast<char*>(&crc32), sizeof(unsigned long));
+        }
+    }
 }
