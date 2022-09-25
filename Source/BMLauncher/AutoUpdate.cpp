@@ -3,6 +3,8 @@
 
 
 #include "stdafx.h"
+#include "../src/Helper/files.h";
+
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -40,107 +42,58 @@ AutoUpdate::AutoUpdate(const UpdateServer& updateServer)
 { 
 }
 
-void AutoUpdate::ProcessDirectory(DoublyLinkedList *recList, char* dir)
+std::vector<FileRecord> AutoUpdate::ProcessDirectory(char* dir)
 {
 	char tempText[1024];
 	char tmp[2048];
 
-	sprintf_s(tempText, 1024, "%s\\*",dir);
+    auto filePaths = GetFilePaths(std::filesystem::path(dir));
 
-	FileNameList *list = GetNameList(tempText, "");
-
-	for (int i = 0; list && i < list->numOfFiles; ++i)
-	{
-		// looking for a period, which would indicate a file
-		int isFile = FALSE;
-		for (int j = 0; j < (int)strlen(list->nameList[i].name); ++j)
-		{
-			if ('.' == list->nameList[i].name[j])
-				isFile = TRUE;
-		}
-
-		if (isFile)
-		{
-			if (!strncmp(".",list->nameList[i].name,1))
-				;
-			else if (!strncmp("..",list->nameList[i].name,2))
-				;
-			else if (!_strnicmp("auto",list->nameList[i].name,strlen("auto")))
-				;
-			else if (!_strnicmp("BMLauncher",list->nameList[i].name,strlen("BMLauncher")))
-				;
-			else
-			{
-				if(!_strnicmp("BMLauncher",list->nameList[i].name,strlen("BMLInstaller")))
-					newLauncher = true;
-
-				sprintf_s(tempText, 1024, "%s\\%s",dir,list->nameList[i].name);
-				HANDLE tempFile = CreateFile(tempText,GENERIC_READ,0, NULL, OPEN_EXISTING,
-							 FILE_ATTRIBUTE_NORMAL, NULL);
-
-				if (!tempFile)
-				{
-					sprintf_s( tmp, 2048, "Unable to open %s to get its time.\r\n", tempText );
-					UpdateTextBox( tmp );
-					return;
-				}
- 
-				FILETIME created, accessed, written;
-				if (!GetFileTime(	tempFile, &created, &accessed, &written))
-				{
-					sprintf_s( tmp, 2048, "Unable to get time info for %s.\r\n", tempText );
-					UpdateTextBox( tmp );
-					return;
-				}
-
-				DWORD size;
-				size = GetFileSize(tempFile,NULL);
-				if (0xFFFFFFFF == size)
-				{
-					sprintf_s( tmp, 2048, "Unable to get size info for %s.\r\n", tempText );
-					UpdateTextBox( tmp );
-					return;
-				}
-
-				// close down file
-				CloseHandle(tempFile);
-
-				DWORD dwCrc32;
-				DWORD crcResult = GetCRC(tempText, dwCrc32);
-//				assert(!crcResult);
-
-                ULARGE_INTEGER ull;
-                ull.LowPart = written.dwLowDateTime;
-                ull.HighPart = written.dwHighDateTime;
-
-				FileRecord *fr = new FileRecord(0,tempText);
-				fr->time = ull.QuadPart / 10000000ULL - 11644473600ULL;
-				fr->size = dwCrc32; //size;
-				recList->Append(fr);
-			}
-		}
+    std::vector<FileRecord> records;
+    for (const auto& path : filePaths) {
+		if (!_strnicmp("auto",path.filename().string().c_str(), strlen("auto")))
+			;
+		else if (!_strnicmp("BMLauncher", path.filename().string().c_str(),strlen("BMLauncher")))
+			;
 		else
 		{
-			sprintf_s(tempText, 1024, "%s\\%s",dir,list->nameList[i].name);
-			ProcessDirectory(recList,tempText);
+			if(!_strnicmp("BMLauncher", path.filename().string().c_str(),strlen("BMLInstaller")))
+				newLauncher = true;
+
+            // get relative path from the directory we're processing
+            std::filesystem::path relativeFilePath = std::filesystem::relative(path, std::filesystem::path(dir));
+
+            // get the last modified time of the file
+            using namespace std::chrono;
+            auto sctp = time_point_cast<system_clock::duration>(std::filesystem::last_write_time(path) - std::filesystem::file_time_type::clock::now() + system_clock::now());
+            std::time_t writtenTime = system_clock::to_time_t(sctp);
+
+            // generate cyclical redundancy check
+            unsigned long crc32;
+            unsigned long crcResult = GetCRC(path.string(), crc32);
+            assert(!crcResult);
+
+            {
+                FileRecord fr(0, (char*)relativeFilePath.string().c_str());
+                fr.time = writtenTime;
+                fr.size = crc32;
+                records.push_back(fr);
+            }
 		}
-
-
 	}
-
-
-	delete list;
-
+    return records;
 }
 
 //*********************************************************************
-void AutoUpdate::ProcessIndexData(DoublyLinkedList *list, char *data, DWORD length)
+std::vector<FileRecord> AutoUpdate::ProcessIndexData(char *data, DWORD length)
 {
 	char *curPtr = data;
 	char *endPtr = data + length;
+    char tempText[1024];
     short size{ 1 };
 
     // for writing of this see IndexMaker.cpp :: ProcessDirectory
+    std::vector<FileRecord> records;
 	while (curPtr < endPtr)
 	{
         /* ---- FORMAT ----
@@ -153,18 +106,23 @@ void AutoUpdate::ProcessIndexData(DoublyLinkedList *list, char *data, DWORD leng
 		curPtr += 2;
 		if (size != -1)
 		{
-            std::string tempText(size+1, '\0');
 			memcpy(&tempText,curPtr,size);
+            tempText[size] = 0; // null char termination
 			tempText[3] -= 1;
 			curPtr += size;
-			FileRecord *fr = new FileRecord(0,(char*)tempText.c_str());
-			memcpy(&(fr->time),curPtr, sizeof(std::time_t));
-			curPtr += sizeof(std::time_t);
-			memcpy(&(fr->size),curPtr, sizeof(unsigned long));
-			curPtr += sizeof(unsigned long);
-			list->Append(fr);
+            FileRecord fr(0, tempText);
+            memcpy(&(fr.time), curPtr, sizeof(std::time_t));
+            curPtr += sizeof(std::time_t);
+            memcpy(&(fr.size), curPtr, sizeof(unsigned long));
+            curPtr += sizeof(unsigned long);
+            records.push_back(fr);
 		}
+        else {
+            break;
+        }
 	}
+
+    return records;
 }
 
 //*********************************************************************
@@ -287,17 +245,16 @@ void AutoUpdate::Update()
 
 	UpdateTextBox( "Updating Blade Mistress\r\n\r\n" );
 
-	DoublyLinkedList *localList, *masterList;
+	DoublyLinkedList *masterList;
 
-	localList  = new DoublyLinkedList();
 	masterList = new DoublyLinkedList();
 
 	// fill local list
-	sprintf_s(tmp, 256, ".\\%s", m_updateServer.pszServerName);
-	ProcessDirectory(localList, tmp);
+	sprintf_s(tmp, 256, "%s", m_updateServer.pszServerName);
+	auto localRecords = ProcessDirectory(tmp);
 
 
-	// fill master list
+	// fill remote list
 	HINTERNET hInternetSession;   
 	HINTERNET hURL;
 	char cBuffer[1024 * 100];
@@ -308,7 +265,7 @@ void AutoUpdate::Update()
 	hInternetSession = InternetOpen(
 							"Microsoft Internet Explorer",   // agent
 							INTERNET_OPEN_TYPE_PRECONFIG,      // access
-							NULL, NULL, 0);            // defaults
+							NULL, NULL, INTERNET_FLAG_NO_CACHE_WRITE);            // defaults
 
 	char tempText[1024];
 	sprintf_s(tempText,1024,"%s/index.dat", m_updateServer.pszServerURL);
@@ -316,18 +273,16 @@ void AutoUpdate::Update()
 	hURL = InternetOpenUrl(
 				hInternetSession,               // session handle
 				tempText,   // URL to access
-				NULL, 0, 0, 0);               // defaults
+				NULL, 0, INTERNET_FLAG_NO_CACHE_WRITE, 0);               // defaults
 
     // Closely related to IndexMaker.cpp :: ProcessDirectory
 	DWORD fileSize;
-	InternetQueryDataAvailable( hURL, &fileSize,0,0);
-
+	InternetQueryDataAvailable( hURL, &fileSize, INTERNET_FLAG_NO_CACHE_WRITE,0);
 	if (fileSize < 1)
 	{
 		UpdateTextBox("Unable to get index file from website.\r\n");
 		return;
 	}
-
 
 	// read page into memory buffer
 	bResult = InternetReadFile(hURL, (LPSTR)cBuffer,
@@ -338,46 +293,35 @@ void AutoUpdate::Update()
 	InternetCloseHandle(hInternetSession);
 
 	// parse downloaded index file
-	ProcessIndexData(masterList, cBuffer, dwBytesRead);
-
-	// for each master file
-
+    auto remoteRecords = ProcessIndexData(cBuffer, dwBytesRead);
 	int errorCount = 0;
+    for(auto& remoteRecord : remoteRecords) {
+        bool hasLocalCopy = false;
+        for (auto& localRecord : localRecords) {
+            if (strcmp(remoteRecord.WhoAmI(), localRecord.WhoAmI()) == 0) {
+                //	if the local file is old
+                sprintf_s(tmp, 256, "checking %s\r\n", remoteRecord.WhoAmI());
+                UpdateTextBox(tmp);
 
-	FileRecord *frMaster = (FileRecord *) masterList->First();
-	while (frMaster)
-	{
+                if (localRecord.size != remoteRecord.size)
+                    if (!DownloadFile(remoteRecord.WhoAmI()))
+                        ++errorCount;
 
-		// if there is a corresponding local file
-		FileRecord *frLocal = (FileRecord *) localList->Find(frMaster->WhoAmI());
-		if (frLocal)
-		{
-			//	if the local file is old
-			sprintf_s( tmp, 256,"checking %s\r\n", frMaster->WhoAmI() );
-			UpdateTextBox( tmp );
+                hasLocalCopy = true;
+                break;
+            }
+        }
 
-			if (frLocal->size != frMaster->size)
-				if (!DownloadFile(frMaster->WhoAmI()))
-					++errorCount;
-		}
-		else
-		{
+        if (!hasLocalCopy) {
 			// copy the new version from the website
-			if (!DownloadFile(frMaster->WhoAmI()))
+			if (!DownloadFile(remoteRecord.WhoAmI()))
 				++errorCount;
 		}
 
-		frMaster = (FileRecord *) masterList->Find(frMaster->WhoAmI());
-
-		frMaster = (FileRecord *) masterList->Next();
 	}
 
 
 	// clean up
-
-	delete masterList;
-	delete localList;
-
 	if (errorCount) 
 	{
 		sprintf_s( tmp, 256,"\r\n\r\n*** %d files could not be downloaded. **\r\n", errorCount );

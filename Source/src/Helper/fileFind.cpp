@@ -20,7 +20,6 @@ struct NameRecord
 
 FileNameList *GetNameList(char *wildcard, char*path)
 {
-//   char nameList[500][MAX_FILE_NAME_SIZE];
 	NameRecord *first;
    int index = 0;
    

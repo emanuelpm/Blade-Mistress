@@ -46,7 +46,7 @@ CBMLauncherDlg::CBMLauncherDlg(CWnd* pParent /*=NULL*/)
 	m_hasUpdated = false;
 
 	strcpy_s(_updateServers[kServerType_Default].pszServerName, UpdateServer::iServerNameSize, "Default");
-	strcpy_s(_updateServers[kServerType_Default].pszServerURL, UpdateServer::iServerUrlSize, "http://updates.blademistress.com/");
+	strcpy_s(_updateServers[kServerType_Default].pszServerURL, UpdateServer::iServerUrlSize, "http://localhost:80"); // TODO not permanent
 }
 
 void CBMLauncherDlg::DoDataExchange(CDataExchange* pDX)

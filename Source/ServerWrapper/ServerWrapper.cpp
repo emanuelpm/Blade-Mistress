@@ -123,7 +123,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      LPSTR     lpCmdLine,
                      int       nCmdShow)
 {
- 	// TODO: Place code here.
 	MSG msg;
 	HACCEL hAccelTable;
 
@@ -345,7 +344,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case WM_PAINT:
 			hdc = BeginPaint(hWnd, &ps);
-			// TODO: Add any drawing code here...
 			DrawScreen(hWnd, hdc);
 			EndPaint(hWnd, &ps);
 			break;

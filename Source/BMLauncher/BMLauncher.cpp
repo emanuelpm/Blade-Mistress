@@ -27,7 +27,6 @@ END_MESSAGE_MAP()
 
 CBMLauncherApp::CBMLauncherApp()
 {
-	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
@@ -62,12 +61,10 @@ BOOL CBMLauncherApp::InitInstance()
 	int nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
 	{
-		// TODO: Place code here to handle when the dialog is
 		//  dismissed with OK
 	}
 	else if (nResponse == IDCANCEL)
 	{
-		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
 	}
 

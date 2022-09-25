@@ -11,6 +11,7 @@
 #include "BMUpdater.h"
 
 #include <chrono>
+#include <vector>
 
 struct UpdateServer;
 
@@ -45,8 +46,8 @@ private:
 	bool newLauncher;
 	const UpdateServer& m_updateServer;
 
-	void ProcessDirectory(DoublyLinkedList *recList, char* dir);
-	void ProcessIndexData(DoublyLinkedList *list, char *data, DWORD length);
+	std::vector<FileRecord> ProcessDirectory(char* dir);
+    std::vector<FileRecord> ProcessIndexData(char *data, DWORD length);
 	int DownloadFile(char *fileName);
 	void UpdateTextBox(char* txt);
 };

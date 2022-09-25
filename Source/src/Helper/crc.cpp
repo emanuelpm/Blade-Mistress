@@ -86,7 +86,7 @@ void CalcCrc32(const unsigned char byte, unsigned long& crc32Out)
 unsigned long GetCRC(char * fileName, unsigned long& crc32Out)
 {
 	assert(fileName);
-	assert(lstrlen(fileName));
+	assert(strlen(fileName));
 
 
     unsigned long errorCode = 0L;
@@ -131,7 +131,7 @@ unsigned long GetCRC(char * fileName, unsigned long& crc32Out)
 unsigned long GetCRCForString(char * string)
 {
 	assert(string);
-	assert(lstrlen(string));
+	assert(strlen(string));
 
     unsigned long dwCrc32 = 0xFFFFFFFF;
 	for(int nLoop = 0; nLoop < strlen(string); ++nLoop)
@@ -147,7 +147,6 @@ unsigned long GetCRC(std::string fileName, unsigned long& crc32Out)
 
 unsigned long GetCRCForString(std::string string)
 {
-    assert(string);
     assert(string.size());
 
     unsigned long dwCrc32 = 0xFFFFFFFF;

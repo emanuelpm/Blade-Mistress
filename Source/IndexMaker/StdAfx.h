@@ -11,7 +11,6 @@
 #endif // _MSC_VER > 1000
 
 
-// TODO: reference additional headers your program requires here
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

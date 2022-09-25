@@ -152,6 +152,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Helper\files.cpp" />
     <ClCompile Include="AutoUpdate.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -245,6 +246,7 @@
     <ResourceCompile Include="BMLauncher.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\Helper\files.h" />
     <ClInclude Include="AutoUpdate.h" />
     <ClInclude Include="BMAboutDlg.h" />
     <ClInclude Include="BMLauncher.h" />
