@@ -15,6 +15,7 @@
 #include <istream>
 #include <streambuf>
 #include <string>
+#include <sstream>
 
 #include "Autoupdate.h"
 #include "UpdateServer.h"
@@ -42,85 +43,33 @@ AutoUpdate::AutoUpdate(const UpdateServer& updateServer)
 { 
 }
 
-std::vector<FileRecord> AutoUpdate::ProcessDirectory(char* dir)
-{
-	char tempText[1024];
-	char tmp[2048];
-
-    auto filePaths = GetFilePaths(std::filesystem::path(dir));
-
-    std::vector<FileRecord> records;
-    for (const auto& path : filePaths) {
-		if (!_strnicmp("auto",path.filename().string().c_str(), strlen("auto")))
-			;
-		else if (!_strnicmp("BMLauncher", path.filename().string().c_str(),strlen("BMLauncher")))
-			;
-		else
-		{
-			if(!_strnicmp("BMLauncher", path.filename().string().c_str(),strlen("BMLInstaller")))
-				newLauncher = true;
-
-            // get relative path from the directory we're processing
-            std::filesystem::path relativeFilePath = std::filesystem::relative(path, std::filesystem::path(dir));
-
-            // get the last modified time of the file
-            using namespace std::chrono;
-            auto sctp = time_point_cast<system_clock::duration>(std::filesystem::last_write_time(path) - std::filesystem::file_time_type::clock::now() + system_clock::now());
-            std::time_t writtenTime = system_clock::to_time_t(sctp);
-
-            // generate cyclical redundancy check
-            unsigned long crc32;
-            unsigned long crcResult = GetCRC(path.string(), crc32);
-            assert(!crcResult);
-
-            {
-                FileRecord fr(0, (char*)relativeFilePath.string().c_str());
-                fr.time = writtenTime;
-                fr.size = crc32;
-                records.push_back(fr);
-            }
-		}
-	}
-    return records;
-}
-
 //*********************************************************************
-std::vector<FileRecord> AutoUpdate::ProcessIndexData(char *data, DWORD length)
+std::vector<FileRecord> AutoUpdate::ProcessIndexData(std::istream* inStream)
 {
-	char *curPtr = data;
-	char *endPtr = data + length;
-    char tempText[1024];
-    short size{ 1 };
-
     // for writing of this see IndexMaker.cpp :: ProcessDirectory
+    short size{ 1 };
     std::vector<FileRecord> records;
-	while (curPtr < endPtr)
-	{
+    while (true) {
         /* ---- FORMAT ----
         *  - relative path length
         *  - "tagged" relative path
         *  - last modified time
         *  - cyclical redundancy check
         */
-		memcpy(&size,curPtr,2);
-		curPtr += 2;
-		if (size != -1)
-		{
-			memcpy(&tempText,curPtr,size);
-            tempText[size] = 0; // null char termination
-			tempText[3] -= 1;
-			curPtr += size;
-            FileRecord fr(0, tempText);
-            memcpy(&(fr.time), curPtr, sizeof(std::time_t));
-            curPtr += sizeof(std::time_t);
-            memcpy(&(fr.size), curPtr, sizeof(unsigned long));
-            curPtr += sizeof(unsigned long);
-            records.push_back(fr);
-		}
-        else {
+        inStream->read((char*)(&size), 2);
+        if (size == -1)
             break;
-        }
-	}
+
+        std::string fileName(size, '\0');
+        inStream->read(&fileName[0], size);
+        fileName[3] -= 1;
+
+        FileRecord fr(0, (char*)fileName.c_str());
+        inStream->read((char*)(&fr.time), sizeof(std::time_t));
+        inStream->read((char*)(&fr.size), sizeof(unsigned long));
+
+        records.push_back(fr);
+    }
 
     return records;
 }
@@ -251,7 +200,7 @@ void AutoUpdate::Update()
 
 	// fill local list
 	sprintf_s(tmp, 256, "%s", m_updateServer.pszServerName);
-	auto localRecords = ProcessDirectory(tmp);
+    auto localRecords = GetFileDetails(std::filesystem::path(tmp));
 
 
 	// fill remote list
@@ -276,7 +225,7 @@ void AutoUpdate::Update()
 				NULL, 0, INTERNET_FLAG_NO_CACHE_WRITE, 0);               // defaults
 
     // Closely related to IndexMaker.cpp :: ProcessDirectory
-	DWORD fileSize;
+    unsigned long fileSize;
 	InternetQueryDataAvailable( hURL, &fileSize, INTERNET_FLAG_NO_CACHE_WRITE,0);
 	if (fileSize < 1)
 	{
@@ -286,26 +235,37 @@ void AutoUpdate::Update()
 
 	// read page into memory buffer
 	bResult = InternetReadFile(hURL, (LPSTR)cBuffer,
-					(DWORD)1024*100, &dwBytesRead);
+					(unsigned long)1024*100, &dwBytesRead);
 
 	// close down connections
 	InternetCloseHandle(hURL);
 	InternetCloseHandle(hInternetSession);
 
 	// parse downloaded index file
-    auto remoteRecords = ProcessIndexData(cBuffer, dwBytesRead);
+    std::string indexDataBuffer(cBuffer, cBuffer + dwBytesRead);
+    std::stringstream indexDataStream(indexDataBuffer);
+    auto remoteRecords = ProcessIndexData(&indexDataStream);
 	int errorCount = 0;
     for(auto& remoteRecord : remoteRecords) {
         bool hasLocalCopy = false;
         for (auto& localRecord : localRecords) {
-            if (strcmp(remoteRecord.WhoAmI(), localRecord.WhoAmI()) == 0) {
+            if (!_strnicmp("auto", (char*)localRecord.relativePath.string().c_str(), strlen("auto")))
+                continue;
+            else if (!_strnicmp("BMLauncher", (char*)localRecord.relativePath.string().c_str(), strlen("BMLauncher")))
+                continue;
+            else if (!_strnicmp("BMLauncher", (char*)localRecord.relativePath.string().c_str(), strlen("BMLInstaller")))
+                    newLauncher = true;
+
+            if (strcmp(remoteRecord.WhoAmI(), (char*)localRecord.relativePath.string().c_str()) == 0) {
                 //	if the local file is old
                 sprintf_s(tmp, 256, "checking %s\r\n", remoteRecord.WhoAmI());
                 UpdateTextBox(tmp);
 
-                if (localRecord.size != remoteRecord.size)
-                    if (!DownloadFile(remoteRecord.WhoAmI()))
+                if (localRecord.crc32 != remoteRecord.size) {
+                    if (!DownloadFile(remoteRecord.WhoAmI())) {
                         ++errorCount;
+                    }
+                }
 
                 hasLocalCopy = true;
                 break;
