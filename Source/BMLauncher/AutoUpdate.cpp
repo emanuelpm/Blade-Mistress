@@ -44,37 +44,6 @@ AutoUpdate::AutoUpdate(const UpdateServer& updateServer)
 }
 
 //*********************************************************************
-std::vector<FileRecord> AutoUpdate::ProcessIndexData(std::istream* inStream)
-{
-    // for writing of this see IndexMaker.cpp :: ProcessDirectory
-    short size{ 1 };
-    std::vector<FileRecord> records;
-    while (true) {
-        /* ---- FORMAT ----
-        *  - relative path length
-        *  - "tagged" relative path
-        *  - last modified time
-        *  - cyclical redundancy check
-        */
-        inStream->read((char*)(&size), 2);
-        if (size == -1)
-            break;
-
-        std::string fileName(size, '\0');
-        inStream->read(&fileName[0], size);
-        fileName[3] -= 1;
-
-        FileRecord fr(0, (char*)fileName.c_str());
-        inStream->read((char*)(&fr.time), sizeof(std::time_t));
-        inStream->read((char*)(&fr.size), sizeof(unsigned long));
-
-        records.push_back(fr);
-    }
-
-    return records;
-}
-
-//*********************************************************************
 int AutoUpdate::DownloadFile(char *fileName)
 {
 	char tmp[1024];
@@ -244,7 +213,8 @@ void AutoUpdate::Update()
 	// parse downloaded index file
     std::string indexDataBuffer(cBuffer, cBuffer + dwBytesRead);
     std::stringstream indexDataStream(indexDataBuffer);
-    auto remoteRecords = ProcessIndexData(&indexDataStream);
+    auto remoteRecords = ReadFileDetailsFromStream(&indexDataStream);
+
 	int errorCount = 0;
     for(auto& remoteRecord : remoteRecords) {
         bool hasLocalCopy = false;
@@ -256,13 +226,13 @@ void AutoUpdate::Update()
             else if (!_strnicmp("BMLauncher", (char*)localRecord.relativePath.string().c_str(), strlen("BMLInstaller")))
                     newLauncher = true;
 
-            if (strcmp(remoteRecord.WhoAmI(), (char*)localRecord.relativePath.string().c_str()) == 0) {
+            if (remoteRecord.relativePath == localRecord.relativePath) {
                 //	if the local file is old
-                sprintf_s(tmp, 256, "checking %s\r\n", remoteRecord.WhoAmI());
+                sprintf_s(tmp, 256, "checking %s\r\n", remoteRecord.relativePath.string().c_str());
                 UpdateTextBox(tmp);
 
-                if (localRecord.crc32 != remoteRecord.size) {
-                    if (!DownloadFile(remoteRecord.WhoAmI())) {
+                if (localRecord.crc32 != remoteRecord.crc32) {
+                    if (!DownloadFile((char*)remoteRecord.relativePath.string().c_str())) {
                         ++errorCount;
                     }
                 }
@@ -274,8 +244,9 @@ void AutoUpdate::Update()
 
         if (!hasLocalCopy) {
 			// copy the new version from the website
-			if (!DownloadFile(remoteRecord.WhoAmI()))
-				++errorCount;
+            if (!DownloadFile((char*)remoteRecord.relativePath.string().c_str())) {
+                ++errorCount;
+            }
 		}
 
 	}

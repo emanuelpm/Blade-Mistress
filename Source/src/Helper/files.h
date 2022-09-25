@@ -1,6 +1,7 @@
 #ifndef FILES_H
 #define FILES_H
 
+#include <iostream>
 #include <filesystem>
 #include <chrono>
 #include <vector>
@@ -19,5 +20,8 @@ public:
 
 std::vector<std::filesystem::path> GetFilePaths(std::filesystem::path rootDirectory);
 std::vector<FileDetail> GetFileDetails(std::filesystem::path rootDirectory);
+
+std::vector<FileDetail> ReadFileDetailsFromStream(std::istream* inStream);
+void WriteFileDetailsToStream(std::ostream* outStream, std::vector<FileDetail> details);
 
 #endif

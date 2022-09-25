@@ -46,7 +46,6 @@ private:
 	bool newLauncher;
 	const UpdateServer& m_updateServer;
 
-    std::vector<FileRecord> ProcessIndexData(std::istream* inStream);
 	int DownloadFile(char *fileName);
 	void UpdateTextBox(char* txt);
 };

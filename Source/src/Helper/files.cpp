@@ -43,3 +43,60 @@ std::vector<FileDetail> GetFileDetails(std::filesystem::path rootDirectory) {
 
     return details;
 }
+
+std::vector<FileDetail> ReadFileDetailsFromStream(std::istream* inStream) {
+    short size{ 1 };
+    std::vector<FileDetail> details;
+    while (true) {
+        /* ---- FORMAT ----
+        *  - relative path length
+        *  - "tagged" relative path
+        *  - last modified time
+        *  - cyclical redundancy check
+        */
+        inStream->read((char*)(&size), 2);
+        if (size == -1)
+            break;
+
+        std::string fileName(size, '\0');
+        inStream->read(&fileName[0], size);
+        fileName[3] -= 1;
+
+        FileDetail fr;
+        fr.relativePath = std::filesystem::path(fileName);
+        inStream->read((char*)(&fr.writeTime), sizeof(std::time_t));
+        inStream->read((char*)(&fr.crc32), sizeof(unsigned long));
+
+        details.push_back(fr);
+    }
+
+    return details;
+}
+
+void WriteFileDetailsToStream(std::ostream* outStream, std::vector<FileDetail> details) {
+    for (const auto& detail : details) {
+        /* ---- FORMAT ----
+        *  - relative path length
+        *  - "tagged" relative path
+        *  - last modified time
+        *  - cyclical redundancy check
+        */
+        std::string pathString = detail.relativePath.string();
+        std::time_t writeTime = detail.writeTime;
+        unsigned long crc32 = detail.crc32;
+
+        std::cout << "\"" << pathString << "\"" << "\r\n";
+
+        short pathSize = pathString.size();
+        outStream->write(reinterpret_cast<char*>(&pathSize), 2);
+
+        pathString[3] += 1;  // tag offset
+        outStream->write(pathString.c_str(), pathSize);
+
+        outStream->write(reinterpret_cast<char*>(&writeTime), sizeof(std::time_t));
+        outStream->write(reinterpret_cast<char*>(&crc32), sizeof(unsigned long));
+    }
+
+    short endMarker = -1;
+    outStream->write(reinterpret_cast<char*>(&endMarker), 2);
+}
