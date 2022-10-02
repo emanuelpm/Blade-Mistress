@@ -2,9 +2,10 @@
 #include "crc.h"
 #include <cassert>
 
+
 std::vector<std::filesystem::path> GetFilePaths(std::filesystem::path rootDirectory) {
     std::vector<std::filesystem::path> paths;
-    if (!std::filesystem::exists(rootDirectory))
+    if (!std::filesystem::exists(rootDirectory) || !std::filesystem::is_directory(rootDirectory))
         return paths;
 
     for (const auto& dirEntry : std::filesystem::recursive_directory_iterator(rootDirectory)) {
@@ -18,7 +19,7 @@ std::vector<std::filesystem::path> GetFilePaths(std::filesystem::path rootDirect
 
 std::vector<FileDetail> GetFileDetails(std::filesystem::path rootDirectory) {
     std::vector<FileDetail> details;
-    auto filePaths = GetFilePaths(rootDirectory); // TODO probably combine this function and that function
+    auto filePaths = GetFilePaths(rootDirectory);
     for (const auto& path : filePaths) {
         // get relative path from the directory we're processing
         std::filesystem::path relativeFilePath = std::filesystem::relative(path, rootDirectory);

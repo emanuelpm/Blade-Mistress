@@ -5,7 +5,6 @@
 #include "stdafx.h"
 
 #include "..\src\helper\linklist.h"
-#include "..\src\helper\fileFind.h"
 #include "..\src\helper\crc.h"
 #include "BMLauncher.h"
 #include "BMUpdater.h"

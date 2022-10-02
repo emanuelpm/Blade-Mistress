@@ -170,3 +170,6 @@ Source/BMLauncher/launcher_config.dat
 StagingFilesClient/
 StagingFilesServer/
 /Source/BMLauncher/Default
+/Source/Dat
+/Source/options.dat
+/Source/localSettings.txt

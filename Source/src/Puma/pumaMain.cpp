@@ -168,7 +168,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 }
 
 
-int windowMode = FALSE;
+int windowMode = TRUE; // TODO originally windowMode = FALSE
 
 //********************************************************************************
 void ParseCommandLine(char * commandLine)
@@ -378,6 +378,7 @@ int MaintainDeviceIntegrity(HWND hWnd)
    return S_OK;
 }
 
+#include <filesystem>
 //***************************************************************************************
 INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -386,7 +387,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR lpCmdLine, int nCmdShow)
 
     aLog.Start();
 
-    sprintf(ipAddress, "blademistress.dyndns.org");
+    sprintf(ipAddress, "localhost"); // TODO originally blademistress.dyndns.org
     nameBuffer[0] = passBuffer[0] = 0;
 
     ParseCommandLine(lpCmdLine);

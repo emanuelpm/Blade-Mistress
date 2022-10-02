@@ -39,9 +39,6 @@
     <ClCompile Include="..\src\Helper\Dataobje.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Helper\fileFind.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LauncherConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -83,9 +80,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Src\Helper\Dataobje.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Src\Helper\fileFind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LauncherConfig.h">

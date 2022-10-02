@@ -60,9 +60,6 @@
     <ClCompile Include="src\Helper\Debug.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
-    <ClCompile Include="src\Helper\fileFind.cpp">
-      <Filter>Helper</Filter>
-    </ClCompile>
     <ClCompile Include="src\Helper\GeneralUtils.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
@@ -84,9 +81,6 @@
     <ClCompile Include="src\Helper\UniqueNames.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
-    <ClCompile Include="src\Puma\basegenmode.cpp">
-      <Filter>Puma</Filter>
-    </ClCompile>
     <ClCompile Include="src\Puma\d3dapp.cpp">
       <Filter>Puma</Filter>
     </ClCompile>
@@ -106,9 +100,6 @@
       <Filter>Puma</Filter>
     </ClCompile>
     <ClCompile Include="src\Puma\gamemode.cpp">
-      <Filter>Puma</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Puma\generatormode.cpp">
       <Filter>Puma</Filter>
     </ClCompile>
     <ClCompile Include="src\Puma\Noise.cpp">
@@ -352,9 +343,6 @@
     <ClInclude Include="Src\Helper\Fifo.h">
       <Filter>Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Helper\fileFind.h">
-      <Filter>Helper</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Helper\GeneralUtils.h">
       <Filter>Helper</Filter>
     </ClInclude>
@@ -388,9 +376,6 @@
     <ClInclude Include="Src\Helper\UniqueNames.h">
       <Filter>Helper</Filter>
     </ClInclude>
-    <ClInclude Include="src\Puma\basegenmode.h">
-      <Filter>Puma</Filter>
-    </ClInclude>
     <ClInclude Include="src\Puma\d3dapp.h">
       <Filter>Puma</Filter>
     </ClInclude>
@@ -413,9 +398,6 @@
       <Filter>Puma</Filter>
     </ClInclude>
     <ClInclude Include="src\Puma\gamemode.h">
-      <Filter>Puma</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Puma\generatormode.h">
       <Filter>Puma</Filter>
     </ClInclude>
     <ClInclude Include="src\Puma\Noise.h">

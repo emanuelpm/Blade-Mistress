@@ -129,9 +129,6 @@
     <ClCompile Include="..\Src\dungeon-map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\helper\fileFind.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Src\FileTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -333,9 +330,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\network\Src\Fifo.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\helper\fileFind.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\helper\GeneralUtils.h">

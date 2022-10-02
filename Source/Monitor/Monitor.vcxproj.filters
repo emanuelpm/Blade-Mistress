@@ -30,9 +30,6 @@
     <ClCompile Include="..\src\Helper\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Helper\fileFind.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Src\FileTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,9 +87,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\network\Src\Fifo.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Helper\fileFind.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Helper\GeneralUtils.h">

@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <wininet.h>
 #include "..\src\helper\linklist.h"
-#include "..\src\helper\fileFind.h"
 #include "..\src\helper\crc.h"
 
 struct UpdateServer;

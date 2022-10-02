@@ -33,7 +33,6 @@
 
 #include "../helper/linklist.h"
 #include "gamemode.h"
-#include "../helper/filefind.h"
 #include "../helper/tweakSystem.h"
 
 #include "pumaVideoData.h"

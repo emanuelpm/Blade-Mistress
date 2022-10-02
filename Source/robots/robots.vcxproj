@@ -143,14 +143,12 @@
     <ClCompile Include="..\src\Network\SocketObject.cpp" />
     <ClCompile Include="..\src\Network\TCPSocket.cpp" />
     <ClCompile Include="..\src\Network\UDPSocket.cpp" />
-    <ClCompile Include="..\src\Puma\basegenmode.cpp" />
     <ClCompile Include="..\src\Puma\d3dapp.cpp" />
     <ClCompile Include="..\src\Puma\d3dfont.cpp" />
     <ClCompile Include="..\src\Puma\d3dutil.cpp" />
     <ClCompile Include="..\src\Puma\dsutil.cpp" />
     <ClCompile Include="..\src\Puma\dxutil.cpp" />
     <ClCompile Include="..\src\Puma\gamemode.cpp" />
-    <ClCompile Include="..\src\Puma\generatormode.cpp" />
     <ClCompile Include="..\src\Puma\Noise.cpp" />
     <ClCompile Include="..\src\Puma\plasmaTexture.cpp" />
     <ClCompile Include="..\src\Puma\puma.cpp" />
@@ -178,7 +176,6 @@
     <ClCompile Include="..\src\Helper\crypto.cpp" />
     <ClCompile Include="..\src\Helper\Dataobje.cpp" />
     <ClCompile Include="..\src\Helper\Debug.cpp" />
-    <ClCompile Include="..\src\Helper\fileFind.cpp" />
     <ClCompile Include="..\src\Helper\GeneralUtils.cpp" />
     <ClCompile Include="..\src\Helper\Linklist.cpp" />
     <ClCompile Include="..\src\Helper\Mutex.cpp" />
@@ -327,7 +324,6 @@
     <ClInclude Include="..\src\Network\TCPSocket.h" />
     <ClInclude Include="..\src\Network\UDPSocket.h" />
     <ClInclude Include="..\Src\version.h" />
-    <ClInclude Include="..\src\Puma\basegenmode.h" />
     <ClInclude Include="..\src\Puma\d3dapp.h" />
     <ClInclude Include="..\src\Puma\d3dfont.h" />
     <ClInclude Include="..\src\Puma\d3dres.h" />
@@ -335,7 +331,6 @@
     <ClInclude Include="..\src\Puma\dsutil.h" />
     <ClInclude Include="..\src\Puma\dxutil.h" />
     <ClInclude Include="..\src\Puma\gamemode.h" />
-    <ClInclude Include="..\src\Puma\generatormode.h" />
     <ClInclude Include="..\src\Puma\Noise.h" />
     <ClInclude Include="..\src\Puma\plasmaTexture.h" />
     <ClInclude Include="..\src\Puma\puma.h" />
@@ -363,7 +358,6 @@
     <ClInclude Include="..\src\Helper\crypto.h" />
     <ClInclude Include="..\src\Helper\Dataobje.h" />
     <ClInclude Include="..\src\Helper\Debug.h" />
-    <ClInclude Include="..\src\Helper\fileFind.h" />
     <ClInclude Include="..\src\Helper\GeneralUtils.h" />
     <ClInclude Include="..\src\Helper\Linklist.h" />
     <ClInclude Include="..\src\Helper\Mutex.h" />
