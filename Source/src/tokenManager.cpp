@@ -9,6 +9,8 @@
 #include ".\helper\GeneralUtils.h"
 #include "BBO-Stower.h"
 
+const char* const pszTokenFile = "serverdata\\tokenData.dat";
+
 TokenManager tokenMan;
 
 //******************************************************************
@@ -196,7 +198,7 @@ void TokenManager::Tick(void)
 //******************************************************************
 void TokenManager::Save(void)
 {
-	FILE *fp = fopen("serverdata\\tokenData.dat","w");
+	FILE *fp = fopen(pszTokenFile,"w");
 	if (fp)
 	{
 		for (int i = 0; i < MAGIC_MAX; ++i)
@@ -227,7 +229,7 @@ void TokenManager::Load(void)
 {
 	int tempInt;
 
-	FILE *fp = fopen("tokenData.dat","r");
+	FILE *fp = fopen(pszTokenFile,"r");
 	if (fp)
 	{
 		for (int i = 0; i < MAGIC_MAX; ++i)
