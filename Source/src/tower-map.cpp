@@ -732,7 +732,7 @@ void TowerMap::ProcessVotes(void)
 
 				
 				// Make guild name changes unique
-				if( GUILDBILL_CHANGESTYLE == bills[i].type && !UN_IsNameUnique(&(bills[i].subject[0])) ) {
+				if( GUILDBILL_CHANGENAME == bills[i].type && !UN_IsNameUnique(&(bills[i].subject[0])) ) {
 					sprintf(logText,"FAILED, ");
 					LogOutput("votelog.txt", logText);
 
