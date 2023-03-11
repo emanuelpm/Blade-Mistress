@@ -7543,7 +7543,7 @@ void BBOSAvatar::QuestMovement(SharedSpace *ss)
                                          sizeof(mAppear),(void *)&mAppear);
                             }
                             else if (abs(cellX - qt->x) < 4 && abs(cellY - qt->y) < 4 && 
-                                 0 == q->completeVal && SPACE_GROUND == ss->WhatAmI())
+                                 0 == q->completeVal && SPACE_GROUND == ss->WhatAmI() && (qt->mapType==SPACE_GROUND))
                             {
                                 q->completeVal = 1; // made monster; don't make it again.
 
