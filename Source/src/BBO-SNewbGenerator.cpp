@@ -79,27 +79,31 @@ void BBOSNewbGenerator::Tick(SharedSpace *ss)
 							good = TRUE;
 
 							int color = gm->Color(mx,my);
-							if (color > 5 || color < 1)
+							if (color > 7 || color < 2)
 								good = FALSE;
 							else
 							{
-								if (1 == color && 
-									 !(MONSTER_PLACE_GRASS & monsterData[i][j].placementFlags)
-									)
-									good = FALSE;
 								if (2 == color && 
 									 !(MONSTER_PLACE_GRASS & monsterData[i][j].placementFlags)
 									)
 									good = FALSE;
 								if (3 == color && 
-									 !(MONSTER_PLACE_SWAMP & monsterData[i][j].placementFlags)
+									 !(MONSTER_PLACE_GRASS & monsterData[i][j].placementFlags)
 									)
 									good = FALSE;
-								if (4 == color && 
+								if (4 == color &&
+									!(MONSTER_PLACE_WASTE & monsterData[i][j].placementFlags)
+									)
+									good = FALSE;
+								if (5 == color &&
+									!(MONSTER_PLACE_SWAMP & monsterData[i][j].placementFlags)
+									)
+									good = FALSE;
+								if (6 == color &&
 									 !(MONSTER_PLACE_DESERT & monsterData[i][j].placementFlags)
 									)
 									good = FALSE;
-								if (5 == color && 
+								if (7 == color && 
 									 !(MONSTER_PLACE_SNOW & monsterData[i][j].placementFlags)
 									)
 									good = FALSE;
