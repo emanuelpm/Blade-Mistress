@@ -1,5 +1,5 @@
 # Blade-Mistress
-Blade Mistress was a small MMO from the early 2000's that was created by Thom Robertson.  It was influenced heavily by MUDs and was meant to be low bandwidth yet still provide a fun, unique experience to players.
+This archived depot contains Blade Mistress, a small MMO from the early 2000's that was created by Thom Robertson.  It was influenced heavily by MUDs and was meant to be low bandwidth yet still provide a fun, unique experience to players.
 
 The game had unique features for the time, such as:
 
@@ -20,19 +20,6 @@ Building requires Visual Studio 2017 and has only been tested on Windows 10 64bi
 
 # Deploying
 The Scripts directory has 2 scripts, one that creates a Client folder heirarchy and one that creates a Server heirarchy.  Both require Release executables to be built.  The Client structure is also what is used by the Update system. The contents of StagingFilesClient can go on any web server, in any sub folder.  That full URL should then be used in the Launcher as the update URL.
-
-# Contribution Ideas
-If you would like to add to the codebase, here are some things that would be useful :)
-
-* Fix all the warnings
-* Improve security (fix potential buffer overflows, more secure password management, etc)
-* Move from using flat files for account data to a database of some sort
-* Port to other platforms (the game can easily run on mobile devices, if a good input scheme can be found)
-* Move from DX8 to something from the last 15 years, at least
-** Vulkan is sexy and can help make the game cross platform
-* Add a localization system
-* Move more things to be data driven and hot-reloadable if possible (like the quest system is)
-* Unify messaging constants between client and server (no more harcoded numbers without comments)
 
 # The Original Blade Mistress Readme
 ** Blade Mistress **
